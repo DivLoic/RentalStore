@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="sakila-business-dao">
-		<class>model.Actor</class>
-		<class>model.Address</class>
-		<class>model.Category</class>
-		<class>model.City</class>
-		<class>model.Country</class>
-		<class>model.Customer</class>
-		<class>model.Film</class>
-		<class>model.FilmActor</class>
-		<class>model.FilmActorPK</class>
-		<class>model.FilmCategory</class>
-		<class>model.FilmCategoryPK</class>
-		<class>model.FilmText</class>
-		<class>model.Inventory</class>
-		<class>model.Language</class>
-		<class>model.Payment</class>
-		<class>model.Rental</class>
-		<class>model.Staff</class>
-		<class>model.Store</class>
+		<class>isep.web.sakila.jpa.entities.Actor</class>
+		<class>isep.web.sakila.jpa.entities.Address</class>
+		<class>isep.web.sakila.jpa.entities.Category</class>
+		<class>isep.web.sakila.jpa.entities.City</class>
+		<class>isep.web.sakila.jpa.entities.Country</class>
+		<class>isep.web.sakila.jpa.entities.Customer</class>
+		<class>isep.web.sakila.jpa.entities.Film</class>
+		<class>isep.web.sakila.jpa.entities.FilmActor</class>
+		<class>isep.web.sakila.jpa.entities.FilmActorPK</class>
+		<class>isep.web.sakila.jpa.entities.FilmCategory</class>
+		<class>isep.web.sakila.jpa.entities.FilmCategoryPK</class>
+		<class>isep.web.sakila.jpa.entities.FilmText</class>
+		<class>isep.web.sakila.jpa.entities.Inventory</class>
+		<class>isep.web.sakila.jpa.entities.Language</class>
+		<class>isep.web.sakila.jpa.entities.Payment</class>
+		<class>isep.web.sakila.jpa.entities.Rental</class>
+		<class>isep.web.sakila.jpa.entities.Staff</class>
+		<class>isep.web.sakila.jpa.entities.Store</class>
 	</persistence-unit>
 </persistence>
