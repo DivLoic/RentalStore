@@ -18,11 +18,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <start-class>hello.Application</start-class>
+    <java.version>1.8</java.version>
+  </properties>
+
 
 
     <build>
@@ -46,4 +53,5 @@
             <url>https://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
+    <packaging>war</packaging>
 </project>
