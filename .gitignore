@@ -15,6 +15,7 @@ buildNumber.properties
 .mvn/timing.properties
 .classpath
 .project
+*.class
 
 ### Node ###
 # Logs
