@@ -22,7 +22,7 @@ public class SakilaBusinessDaoApplication{
 
 		try{
 			for (Actor actor : business.getAllActors()){
-				System.out.println(actor);
+				System.out.println(actor+ " : " +actor.getFirstName() +" "+ actor.getLastName());
 			}
 
 			Actor guiness = business.getByID(1);
