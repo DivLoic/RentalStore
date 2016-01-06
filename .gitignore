@@ -53,3 +53,7 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
+
+sakila-business-webapi/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+sakila-business-webapi/.settings/org.eclipse.m2e.core.prefs
