@@ -16,19 +16,17 @@ import isep.web.sakila.webapi.model.ActorWO;
 
 @Service("actorService")
 @Transactional
-public class ActorServiceImpl implements ActorService
-{
+public class ActorServiceImpl implements ActorService {
 	@Autowired
-	private ActorRepository		actorRepository;
+	private ActorRepository actorRepository;
 
-	private static final Log	log	= LogFactory.getLog(ActorServiceImpl.class);
+	private static final Log log = LogFactory.getLog(ActorServiceImpl.class);
 
-	public List<ActorWO> findAllActors()
-	{
+	@Override
+	public List<ActorWO> findAllActors() {
 		List<ActorWO> actors = new LinkedList<ActorWO>();
 
-		for (Actor actor : actorRepository.findAll())
-		{
+		for (Actor actor : actorRepository.findAll()) {
 			actors.add(new ActorWO(actor));
 			log.debug("Adding " + actor);
 		}
@@ -36,20 +34,19 @@ public class ActorServiceImpl implements ActorService
 		return actors;
 	}
 
-	public ActorWO findById(int id)
-	{
+	@Override
+	public ActorWO findById(int id) {
 		log.debug(String.format("Looking for user by Id %s", id));
 		Actor actor = actorRepository.findOne(id);
 
-		if (actor != null)
-		{
+		if (actor != null) {
 			return new ActorWO(actor);
 		}
 		return null;
 	}
 
-	public void saveActor(ActorWO actorWO)
-	{
+	@Override
+	public void saveActor(ActorWO actorWO) {
 		Actor actor = new Actor();
 		actor.setLastName(actorWO.getLastName());
 		actor.setFirstName(actorWO.getFirstName());
@@ -57,8 +54,8 @@ public class ActorServiceImpl implements ActorService
 		actorRepository.save(actor);
 	}
 
-	public void updateActor(ActorWO actorWO)
-	{
+	@Override
+	public void updateActor(ActorWO actorWO) {
 		Actor actor2update = actorRepository.findOne(actorWO.getActorId());
 		actor2update.setLastName(actorWO.getLastName());
 		actor2update.setFirstName(actorWO.getFirstName());
@@ -67,8 +64,7 @@ public class ActorServiceImpl implements ActorService
 	}
 
 	@Override
-	public void deleteActorById(int id)
-	{
+	public void deleteActorById(int id) {
 		actorRepository.delete(id);
 	}
 
