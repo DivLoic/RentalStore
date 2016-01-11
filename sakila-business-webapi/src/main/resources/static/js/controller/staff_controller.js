@@ -2,13 +2,13 @@
 
 App.controller('StaffController', ['$scope', 'StaffService', function($scope, StaffService) {
 	var self = this;
-	self.staff={pseudo:'', password:''};
+	self.staff={username:'', password:''};
 	
 	self.submit = function() {
-        if(self.staff.pseudo==''){
-            console.log('Error pseudo', self.staff);    
+        if(self.staff.username==''){
+            console.log('Error username', self.staff);    
         }else{
-            console.log('Pseudo is ', self.staff.pseudo);
+            console.log('Username is ', self.staff.username);
             console.log('Password: ', self.staff.password);
             StaffService.logStaff(self.staff);
         }
@@ -16,7 +16,7 @@ App.controller('StaffController', ['$scope', 'StaffService', function($scope, St
     };
     
     self.reset = function(){
-        self.actor={actorId:null,lastName:'',firstName:''};
+    	self.staff={username:'', password:''};
         $scope.myForm.$setPristine(); //reset Form
     };
 }]);
