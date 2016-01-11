@@ -14,6 +14,6 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
 	// nativeQuery = true)
 	// List<Staff> findByUsername(String username);
 
-	@Query("select s from Staff s where s.username = ?1")
-	Staff findByUsername(String username);
+	@Query("select s from Staff s where s.username = ?1 and s.password = ?2")
+	Staff findByUsernameByPassword(String username, String password);
 }

@@ -25,18 +25,18 @@ public class StaffRestController {
 	// -------------------Create a Actor----------------------------------
 
 	@RequestMapping(value = "/staff/", method = RequestMethod.POST)
-	public ResponseEntity<Boolean> signInStaff(@RequestBody StaffWO staffWO, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<StaffWO> signInStaff(@RequestBody StaffWO staffWO, UriComponentsBuilder ucBuilder) {
 		System.out.println("Sign in staff " + staffWO.getUsername());
-
-		Staff listStaff = staffService.signInStaff2(staffWO.getUsername(), null);
-		System.out.println(listStaff.getFirstName());
-		// if (listStaff.size() > 0) {
-		// return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-		// } else {
-		// return new ResponseEntity<Boolean>(false, HttpStatus.OK);
-		// }
-
-		return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+		Staff staff = staffService.signInStaff2(staffWO.getUsername(), staffWO.getPassword());
+		StaffWO staffWOreturn = null;
+		if (staff != null) {
+			System.out.println("logging");
+			staffWOreturn = new StaffWO(staff);
+		} else {
+			staffWOreturn = new StaffWO();
+			System.out.println(" pas logging");
+		}
+		return new ResponseEntity<StaffWO>(staffWOreturn, HttpStatus.OK);
 
 	}
 
