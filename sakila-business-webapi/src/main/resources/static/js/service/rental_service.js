@@ -17,9 +17,9 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 					}
 			);
 		},
-		deleteRental: function(){
+		deleteRental: function(id){
 			console.log('Using the Rental Service: deleteRental.');
-			$http.post('http://localhost:8080/DeleteRental/').then(
+			$http.post('http://localhost:8080/deleteRental/' + id).then(
 					function(res){
 						console.log('Sucess du service, deleteRental: ');
 						console.log(res.data);
