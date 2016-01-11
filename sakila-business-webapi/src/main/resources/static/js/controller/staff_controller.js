@@ -1,6 +1,6 @@
 'use strict';
 
-App.controller('StaffController', ['$scope', 'StaffService', function($scope, ActorService) {
+App.controller('StaffController', ['$scope', 'StaffService', function($scope, StaffService) {
 	var self = this;
 	self.staff={pseudo:'', password:''};
 	
@@ -10,7 +10,7 @@ App.controller('StaffController', ['$scope', 'StaffService', function($scope, Ac
         }else{
             console.log('Pseudo is ', self.staff.pseudo);
             console.log('Password: ', self.staff.password);
-            self.logStaff(self.staff);
+            StaffService.logStaff(self.staff);
         }
         self.reset();
     };
