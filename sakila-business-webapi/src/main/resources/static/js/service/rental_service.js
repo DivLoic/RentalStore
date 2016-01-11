@@ -7,10 +7,13 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 			console.log('Using the Rental Service: addRental.');
 			$http.post('http://localhost:8080/RentalCreate/', rent).then(
 					function(res){
-						console.log('Sucess du service, addRental: ' + res);
+						console.log('Sucess du service, addRental: ');
+						console.log(res.data);
+						return res.data
 					},
-					function(){
+					function(err){
 						console.log('Erreur du service, addRental: ...');
+						return false;
 					}
 			);
 		},
@@ -18,10 +21,13 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 			console.log('Using the Rental Service: deleteRental.');
 			$http.post('http://localhost:8080/DeleteRental/').then(
 					function(res){
-						console.log('Sucess du service, deleteRental: ' + res);
+						console.log('Sucess du service, deleteRental: ');
+						console.log(res.data);
+						return res.data;
 					},
 					function(err){
 						console.log('Erreur du service, deleteRental ...');
+						return false;
 					}
 			);
 		}

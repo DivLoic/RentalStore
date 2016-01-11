@@ -7,17 +7,21 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 		createCustomer: function(customer, address){
 			return $http.post('http://localhost:8080/customerCreate/', {'customer': customer , 'address': address}).then(
 					function(respoonse){
-						console.log('200:' + response);
+						console.log(response.data);
+						return response.data;
 					}, function(err){
-						console.log('200:' + response);
+						console.log("Erreur du service createCustomer.");
+						return false;
 					}
 			)
 		}
 		updateCustomer: function(customer, address){
 			return $http.post('http://localhost:8080/customerUpdate/', {'customer': customer , 'address': address}).then(
 					function(reponse){
-						return response;
+						console.log(response.data);
+						return response.data;
 					}, function(err){
+						console.log("Erreur du service updateCustomer.");
 						return false;
 					}
 			)
