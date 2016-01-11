@@ -6,9 +6,10 @@ App.factory('StaffService', ['$http', '$q', function($http, $q){
 	return {
 		logStaff: function(credentials){
 			return $http.post('http://localhost:8080/staff/', credentials).then(
-						function(reponse){
-							console.log('Succes du service, logStaff: ' + err);
-							return reponse;
+						function(response){
+							console.log('Succes du service, logStaff: ');
+							console.log(response.data);
+							return response.data;
 						},
 						function(err){
 							console.log('Erreur du service, logStaff: ' + err);
