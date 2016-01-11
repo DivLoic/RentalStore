@@ -4,8 +4,8 @@
 
 App.factory('CustomerService', ['$http', '$q', function($http, $q){
 	return {
-		createCustomer: function(customer, address){
-			return $http.post('http://localhost:8080/customerCreate/', {'customer': customer , 'address': address}).then(
+		createCustomer: function(customer){
+			return $http.post('http://localhost:8080/customerCreate/', customer).then(
 					function(respoonse){
 						console.log(response.data);
 						return response.data;
@@ -15,8 +15,8 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 					}
 			)
 		}
-		updateCustomer: function(customer, address){
-			return $http.post('http://localhost:8080/customerUpdate/', {'customer': customer , 'address': address}).then(
+		updateCustomer: function(customer){
+			return $http.post('http://localhost:8080/customerUpdate/', customer).then(
 					function(reponse){
 						console.log(response.data);
 						return response.data;
