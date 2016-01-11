@@ -31,7 +31,7 @@ public class StaffServiceImpl implements StaffService {
 
 	@Override
 	public Staff signInStaff2(String username, String password) {
-		return staffRepository.findByUsername(username);
+		return staffRepository.findByUsernameByPassword(username, password);
 	}
 
 }

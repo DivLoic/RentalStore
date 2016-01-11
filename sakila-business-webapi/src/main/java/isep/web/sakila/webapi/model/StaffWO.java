@@ -8,6 +8,10 @@ public class StaffWO extends WebObject {
 
 	protected String username;
 	protected String password;
+	protected byte staffId;
+	protected String firstName;
+	protected String lastName;
+	protected String email;
 
 	public StaffWO() {
 		super();
@@ -21,8 +25,11 @@ public class StaffWO extends WebObject {
 
 	public StaffWO(final Staff staff) {
 		super();
+		this.staffId = staff.getStaffId();
 		this.username = staff.getUsername();
-		this.password = staff.getPassword();
+		this.firstName = staff.getFirstName();
+		this.lastName = staff.getLastName();
+		this.email = staff.getEmail();
 	}
 
 	public String getUsername() {
@@ -44,6 +51,38 @@ public class StaffWO extends WebObject {
 	@Override
 	public String toString() {
 		return "Staff [username=" + this.username + ", Password=" + this.password + "]";
+	}
+
+	public byte getStaffId() {
+		return staffId;
+	}
+
+	public void setStaffId(byte staffId) {
+		this.staffId = staffId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
