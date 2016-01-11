@@ -20,32 +20,26 @@ import isep.web.sakila.webapi.model.ActorWO;
 import isep.web.sakila.webapi.service.ActorService;
 
 @RestController
-public class ActorRestController
-{
+public class ActorRestController {
 
 	@Autowired
-	ActorService							actorService;
-
-	private static final Log	log	= LogFactory.getLog(ActorRestController.class);
+	ActorService actorService;
+	private static final Log log = LogFactory.getLog(ActorRestController.class);
 
 	@RequestMapping(value = "/actor/", method = RequestMethod.GET)
-	public ResponseEntity<List<ActorWO>> listAllActors()
-	{
+	public ResponseEntity<List<ActorWO>> listAllActors() {
 		List<ActorWO> actors = actorService.findAllActors();
-		if (actors.isEmpty())
-		{
+		if (actors.isEmpty()) {
 			return new ResponseEntity<List<ActorWO>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<ActorWO>>(actors, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/actor/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ActorWO> getActor(@PathVariable("id") int id)
-	{
+	public ResponseEntity<ActorWO> getActor(@PathVariable("id") int id) {
 		System.out.println("Fetching Actor with id " + id);
 		ActorWO staffWO = actorService.findById(id);
-		if (staffWO == null)
-		{
+		if (staffWO == null) {
 			System.out.println("Actor with id " + id + " not found");
 			return new ResponseEntity<ActorWO>(HttpStatus.NOT_FOUND);
 		}
@@ -55,8 +49,7 @@ public class ActorRestController
 	// -------------------Create a Actor----------------------------------
 
 	@RequestMapping(value = "/actor/", method = RequestMethod.POST)
-	public ResponseEntity<Void> createActor(@RequestBody ActorWO actorWO, UriComponentsBuilder ucBuilder)
-	{
+	public ResponseEntity<Void> createActor(@RequestBody ActorWO actorWO, UriComponentsBuilder ucBuilder) {
 		System.out.println("Creating Actor " + actorWO.getLastName());
 
 		actorService.saveActor(actorWO);
@@ -67,13 +60,11 @@ public class ActorRestController
 	}
 
 	@RequestMapping(value = "/actorUpdate/", method = RequestMethod.POST)
-	public ResponseEntity<ActorWO> updateActor(@RequestBody ActorWO actorWO, UriComponentsBuilder ucBuilder)
-	{
+	public ResponseEntity<ActorWO> updateActor(@RequestBody ActorWO actorWO, UriComponentsBuilder ucBuilder) {
 		log.error(String.format("Updating Actor %s ", actorWO.getActorId()));
 		ActorWO currentActor = actorService.findById(actorWO.getActorId());
 
-		if (currentActor == null)
-		{
+		if (currentActor == null) {
 			System.out.println("Actor with id " + actorWO.getActorId() + " not found");
 			return new ResponseEntity<ActorWO>(HttpStatus.NOT_FOUND);
 		}
@@ -86,14 +77,12 @@ public class ActorRestController
 	}
 
 	@RequestMapping(value = "/actorDelete/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ActorWO> deleteActor(@PathVariable("id") int id)
-	{
+	public ResponseEntity<ActorWO> deleteActor(@PathVariable("id") int id) {
 
 		System.out.println("Fetching & Deleting Actor with id " + id);
 
 		ActorWO staffWO = actorService.findById(id);
-		if (staffWO == null)
-		{
+		if (staffWO == null) {
 			System.out.println("Unable to delete. Actor with id " + id + " not found");
 			return new ResponseEntity<ActorWO>(HttpStatus.NOT_FOUND);
 		}

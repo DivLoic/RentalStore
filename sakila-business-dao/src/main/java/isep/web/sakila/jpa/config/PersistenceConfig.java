@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = { "isep.web.sakila" })
 @EntityScan(basePackages = { "isep.web.sakila.jpa" })
 @EnableTransactionManagement
-public class PersistenceConfig{
+public class PersistenceConfig {
 
 	// MySQL DataSource
 	@Bean
-	public DataSource dataSource(){
+	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://91.121.193.238:8081/sakila");
@@ -35,7 +35,7 @@ public class PersistenceConfig{
 	// default values provided by Spring Boot
 	// Here we define it in order to activate/deactivate SQL Logs....
 	@Bean
-	public JpaVendorAdapter jpaVendorAdapter(){
+	public JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(false);
 		hibernateJpaVendorAdapter.setGenerateDdl(false);
@@ -43,7 +43,8 @@ public class PersistenceConfig{
 		return hibernateJpaVendorAdapter;
 	}
 
-	// EntityManageFactory and TransactionManager are defined by default by Spring
+	// EntityManageFactory and TransactionManager are defined by default by
+	// Spring
 	// boot.
 	// therefore, we do not declare anything here
 

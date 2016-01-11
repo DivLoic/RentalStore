@@ -4,21 +4,27 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.google.common.collect.Lists;
+
 import isep.web.sakila.dao.repositories.ActorRepository;
+import isep.web.sakila.dao.repositories.StaffRepository;
 import isep.web.sakila.jpa.entities.Actor;
 
 @Service("business")
-public class Business implements IBusiness{
+public class Business implements IBusiness {
 	@Autowired
 	private ActorRepository actorRepository;
+	@Autowired
+	private StaffRepository staffRepository;
 
 	@Override
-	public List<Actor> getAllActors(){
+	public List<Actor> getAllActors() {
 		return Lists.newArrayList(actorRepository.findAll());
 	}
 
-	public Actor getByID(int actorId){
+	@Override
+	public Actor getByID(int actorId) {
 		return actorRepository.findOne(actorId);
 	}
 }
