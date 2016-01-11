@@ -4,8 +4,17 @@
 
 App.factory('CustomerService', ['$http', '$q', function($http, $q){
 	return {
-		updateCustomer: function(customer){
-			return $http.post('http://localhost:8080/customerUpdate/', customer).then(
+		createCustomer: function(customer, address){
+			return $http.post('http://localhost:8080/customerCreate/', {'customer': customer , 'address': address}).then(
+					function(respoonse){
+						console.log('200:' + response);
+					}, function(err){
+						console.log('200:' + response);
+					}
+			)
+		}
+		updateCustomer: function(customer, address){
+			return $http.post('http://localhost:8080/customerUpdate/', {'customer': customer , 'address': address}).then(
 					function(reponse){
 						return response;
 					}, function(err){
@@ -15,4 +24,4 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 		}
 	}
 	
-}
+}]);
