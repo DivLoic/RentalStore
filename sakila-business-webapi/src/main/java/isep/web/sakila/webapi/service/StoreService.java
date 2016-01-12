@@ -5,13 +5,13 @@ import java.util.List;
 import isep.web.sakila.webapi.model.StoreWO;
 
 public interface StoreService {
-	StoreWO findById(int id);
+	StoreWO findById(byte id);
 
 	void saveStore(StoreWO storeWO);
 
 	void updateStore(StoreWO storeWO);
 
-	void deleteStoreById(int id);
+	void deleteStoreById(byte id);
 
 	List<StoreWO> findAllStores();
 

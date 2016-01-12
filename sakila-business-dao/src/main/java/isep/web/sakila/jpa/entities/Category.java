@@ -1,44 +1,51 @@
 package isep.web.sakila.jpa.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the category database table.
  * 
  */
 @Entity
-@Table(name="category")
-@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
+@Table(name = "category")
+@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="category_id", unique=true, nullable=false)
-	private byte categoryId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "category_id", unique = true, nullable = false)
+	private int categoryId;
 
-	@Column(name="last_update", nullable=false)
+	@Column(name = "last_update", nullable = false)
 	private Timestamp lastUpdate;
 
-	@Column(nullable=false, length=25)
+	@Column(nullable = false, length = 25)
 	private String name;
 
-	//bi-directional many-to-one association to FilmCategory
-	@OneToMany(mappedBy="category")
+	// bi-directional many-to-one association to FilmCategory
+	@OneToMany(mappedBy = "category")
 	private List<FilmCategory> filmCategories;
 
 	public Category() {
 	}
 
-	public byte getCategoryId() {
+	public int getCategoryId() {
 		return this.categoryId;
 	}
 
-	public void setCategoryId(byte categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 

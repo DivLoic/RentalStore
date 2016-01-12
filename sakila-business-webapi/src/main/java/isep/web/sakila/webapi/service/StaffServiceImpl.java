@@ -1,5 +1,8 @@
 package isep.web.sakila.webapi.service;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import isep.web.sakila.dao.repositories.StaffRepository;
 import isep.web.sakila.jpa.entities.Staff;
+import isep.web.sakila.webapi.model.StaffWO;
 
 @Service("staffService")
 @Transactional
@@ -17,17 +21,17 @@ public class StaffServiceImpl implements StaffService {
 
 	private static final Log log = LogFactory.getLog(StaffServiceImpl.class);
 
-	// @Override
-	// public Staff findById(int id) {
-	// log.debug(String.format("Looking for user by Id %s", id));
-	// Staff staff = staffRepository.findOne(id);
-	// return staff;
-	// }
+	@Override
+	public List<StaffWO> findAllStaffs() {
+		List<StaffWO> staffs = new LinkedList<StaffWO>();
 
-	// @Override
-	// public List<Staff> signInStaff(String username, String password) {
-	// return staffRepository.findByUsername(username);
-	// }
+		for (Staff staff : staffRepository.findAll()) {
+			// staffs.add(new StaffWO(staff));
+			// log.debug("Adding " + staff);
+		}
+
+		return staffs;
+	}
 
 	@Override
 	public Staff signInStaff2(String username, String password) {
