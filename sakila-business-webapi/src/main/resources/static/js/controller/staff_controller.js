@@ -10,7 +10,13 @@ App.controller('StaffController', ['$scope', 'StaffService', function($scope, St
         }else{
             console.log('Username is ', self.staff.username);
             console.log('Password: ', self.staff.password);
-            StaffService.logStaff(self.staff);
+            StaffService.logStaff(self.staff).then(
+            		function(data){
+            			console.log(data);
+            		},
+            		function(err){
+            			// échec
+            		});
         }
         self.reset();
     };
