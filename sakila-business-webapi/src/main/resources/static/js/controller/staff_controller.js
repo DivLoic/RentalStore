@@ -16,7 +16,6 @@ App.controller('StaffController', ['$scope', 'StaffService', function($scope, St
 	    			var status = data.username == null ? false : true;
 	    			callBack(status);
 	    		});
-            
         }
     };
     
