@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 
 import isep.web.sakila.dao.repositories.ActorRepository;
+import isep.web.sakila.dao.repositories.CityRepository;
+import isep.web.sakila.dao.repositories.CustomerRepository;
 import isep.web.sakila.dao.repositories.StaffRepository;
+import isep.web.sakila.dao.repositories.StoreRepository;
 import isep.web.sakila.jpa.entities.Actor;
 
 @Service("business")
@@ -17,6 +20,12 @@ public class Business implements IBusiness {
 	private ActorRepository actorRepository;
 	@Autowired
 	private StaffRepository staffRepository;
+	@Autowired
+	private CustomerRepository customerRepository;
+	@Autowired
+	private StoreRepository storeRepository;
+	@Autowired
+	private CityRepository cityRepository;
 
 	@Override
 	public List<Actor> getAllActors() {

@@ -22,7 +22,7 @@ public class StaffRestController {
 	StaffService staffService;
 	private static final Log log = LogFactory.getLog(StaffRestController.class);
 
-	// -------------------Create a Actor----------------------------------
+	// -------------------Sign in ----------------------------------
 
 	@RequestMapping(value = "/staff/", method = RequestMethod.POST)
 	public ResponseEntity<StaffWO> signInStaff(@RequestBody StaffWO staffWO, UriComponentsBuilder ucBuilder) {
