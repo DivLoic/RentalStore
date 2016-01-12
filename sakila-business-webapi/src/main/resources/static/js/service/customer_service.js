@@ -4,6 +4,18 @@
 
 App.factory('CustomerService', ['$http', '$q', function($http, $q){
 	return {
+		getCustomer: function(){
+			return $http.post('http://localhost:8080/customer/').then(
+					function(respoonse){
+						console.log("Success du service: getCustomer.");
+						console.log(response.data);
+						return response.data;
+					}, function(err){
+						console.log("Erreur du service createCustomer.");
+						return false;
+					}
+			)
+		},
 		createCustomer: function(customer){
 			return $http.post('http://localhost:8080/customerCreate/', customer).then(
 					function(respoonse){
