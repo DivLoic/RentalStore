@@ -4,5 +4,13 @@
   "private": true,
   "scripts": {
     "test": "./node_modules/.bin/karma start karma-unit.conf.js --single-run"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.3.14",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.19",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.3",
+    "phantomjs": "^1.9.19"
   }
 }

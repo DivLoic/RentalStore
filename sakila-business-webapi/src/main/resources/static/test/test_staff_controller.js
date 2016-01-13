@@ -13,15 +13,50 @@ describe('StaffController', function(){
 		expect(true).toBe(true);
 	});
 	
-	it('should authorise', function(){
+	it('should declare as authenticate', function(){
 		var $scope = {};
-		var MockStaffService = { logStaff = function(){
-				return {'username': 'a-non-null-username'};
-		}};
+		// Mock de service
+		var MockStaffService = { logStaff : function(){
+			return new Promise(function(resolve, reject) {
+					resolve({'username': 'a-non-null-username'});
+				});
+			}
+		};
 		
-		var controller = $controller('StaffController', { $scope: $scope, StaffService: MockStaffService});
-		controller['staff'] = {'username': 'Mike', 'password': '8cb2237d0679ca88db6464eac60da96345513964'};
-		console.log(controller.StaffService);
-		controller.submit(function(b){console.log(b);})
+		var controller = $controller('StaffController', {$scope: $scope, StaffService: MockStaffService});
+		controller['staff'] = {'username': 'Mike', 'password': 'azerty'};
+		// finally the TEST ! ! !
+		controller.submit(function(res){expect(res).toBe(true);});
+	});
+	
+	
+	it('should declare as non-authenticate', function(){
+		var $scope = {};
+		//Mock de service
+		var MockStaffService = { logStaff : function(){
+			return new Promise(function(resolve, reject) {
+					resolve({'username': null});
+				});
+			}
+		};
+		
+		var controller = $controller('StaffController', {$scope: $scope, StaffService: MockStaffService});
+		controller['staff'] = {'username': 'Mike', 'password': 'querty'};
+		controller.submit(function(res){expect(res).toBe(false);});
+	});
+	
+	it('should not trig the call (no username)', function(){
+		var $scope = {};
+		//Mock de service
+		var MockStaffService = { logStaff : function(){
+			return new Promise(function(resolve, reject) {
+					resolve({'username': null});
+				});
+			}
+		};
+		
+		var controller = $controller('StaffController', {$scope: $scope, StaffService: MockStaffService});
+		controller['staff'] = {'username': '...'};
+		controller.submit(function(res){fail(res)});
 	});
 });
