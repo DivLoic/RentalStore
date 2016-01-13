@@ -3,6 +3,21 @@
  */
 App.factory('FilmService', ['$http', '$q', function($http, $q){
 	return {
+		getFilm: function(){
+			console.log('Using the Rental Service: getFilm.');
+			$http.get('http://localhost:8080/getFilms/').then(
+					function(res){
+						console.log('Sucess du service, getFilm ');
+						console.log(res.data);
+						return res.data;
+					},
+					function(err){
+						console.log('Erreur du service, getFilm ');
+						console.log(err);
+						return $q.reject(err);
+					}
+			);
+		},
 		creatFilm: function(film){
 			console.log('Using the Rental Service: creatFilm.');
 			$http.post('http://localhost:8080/creatFilm/', film).then(
@@ -14,7 +29,7 @@ App.factory('FilmService', ['$http', '$q', function($http, $q){
 					function(err){
 						console.log('Erreur du service, creatFilm ');
 						console.log(err);
-						return false;
+						return $q.reject(err);
 					}
 			);
 		},
@@ -29,7 +44,7 @@ App.factory('FilmService', ['$http', '$q', function($http, $q){
 					function(err){
 						console.log('Erreur du service, deleteFilm ');
 						console.log(err);
-						return false
+						return $q.reject(err);
 					}
 			);
 		},
@@ -43,7 +58,7 @@ App.factory('FilmService', ['$http', '$q', function($http, $q){
 					function(err){
 						console.log('Erreur du service, updateFilm ');
 						console.log(err);
-						return false;
+						return $q.reject(err);
 					}
 			);
 		}

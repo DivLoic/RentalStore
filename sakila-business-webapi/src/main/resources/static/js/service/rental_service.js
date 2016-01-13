@@ -3,6 +3,20 @@
  */
 App.factory('RentalService', ['$http', '$q', function($http, $q){
 	return {
+		getRental: function(){
+			console.log('Using the Rental Service: getRental.');
+			$http.post('http://localhost:8080/getRentals/').then(
+					function(res){
+						console.log('Sucess du service, getRental: ');
+						console.log(res.data);
+						return res.data
+					},
+					function(err){
+						console.log('Erreur du service, getRental: ...');
+						return $q.reject(err);
+					}
+			);
+		},
 		addRental: function(rent){
 			console.log('Using the Rental Service: addRental.');
 			$http.post('http://localhost:8080/RentalCreate/', rent).then(
@@ -13,7 +27,7 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 					},
 					function(err){
 						console.log('Erreur du service, addRental: ...');
-						return false;
+						return $q.reject(err);
 					}
 			);
 		},
@@ -27,7 +41,7 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 					},
 					function(err){
 						console.log('Erreur du service, deleteRental ...');
-						return false;
+						return $q.reject(err);
 					}
 			);
 		}
