@@ -6,10 +6,20 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
 			address:'',address2:'',district:'',cityId:'',postalCode:'',active:null};
 	self.customers=[];
 	
+	self.fetchAllCustomers = function(){
+		CustomerService.getCustomer().then(
+			       function(d) {
+					        self.customers = d;
+				       },
+					function(errResponse){
+						console.error('Error while fetching Currencies');
+					}
+		       );
+	};
+	
 	self.createCustomer = function(customer){
-		CustomerService.createCustomer(customer).then(
-				)
-	}
+		CustomerService.createCustomer(customer);
+	};
 	
 	self.reset = function(){
         self.actor={actorId:null,lastName:'',firstName:''};

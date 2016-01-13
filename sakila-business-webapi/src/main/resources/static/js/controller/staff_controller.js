@@ -6,25 +6,18 @@ App.controller('StaffController', ['$scope', 'StaffService', function($scope, St
 	self.staff={username:'', password:''};
 	
 	self.submit = function(callBack) {
-        if(self.staff.username==''){
-            console.log('Error username', self.staff);    
-        }else{
-            console.log('Username is ', self.staff.username);
-            console.log('Password: ', self.staff.password);
-            StaffService.logStaff(self.staff).then(
-	    		function(data){
-	    			var status = data.username == null ? false : true;
-	    			callBack(status);
-	    		});
-        }
+        StaffService.logStaff(self.staff).then(
+    		function(data){
+    			var status = data.username == null ? false : true;
+    			callBack(status);
+    		});
     };
     
     self.redir = function(status){
     	if (status){
     		window.location.href="/Home.html";
-    		console.log('tu seras être redirigé')
     	}else{
-    		console.log('tu ne seras pas redirigé')
+    		alert("Wrong username or password.");
     	}
     }
     
