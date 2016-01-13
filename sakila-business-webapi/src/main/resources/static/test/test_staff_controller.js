@@ -45,18 +45,4 @@ describe('StaffController', function(){
 		controller.submit(function(res){expect(res).toBe(false);});
 	});
 	
-	it('should not trig the call (no username)', function(){
-		var $scope = {};
-		//Mock de service
-		var MockStaffService = { logStaff : function(){
-			return new Promise(function(resolve, reject) {
-					resolve({'username': null});
-				});
-			}
-		};
-		
-		var controller = $controller('StaffController', {$scope: $scope, StaffService: MockStaffService});
-		controller['staff'] = {'username': '...'};
-		controller.submit(function(res){fail(res)});
-	});
 });
