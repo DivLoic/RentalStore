@@ -4,10 +4,10 @@
 describe('CustomerController', function(){
 	
 	var $controller;
-	var tab = [{'customerId': 'firstName', 'lastName': '', 'email': ''},
-	           {'customerId': 'firstName', 'lastName': '', 'email': ''},
-	           {'customerId': 'firstName', 'lastName': '', 'email': ''},
-	           {'customerId': 'firstName', 'lastName': '', 'email': ''},];
+	var tab = [{'customerId': '1', 'firstName': 'jack', 'lastName': 'doh', 'email': 'sakila@gmail.com'},
+	           {'customerId': '2', 'firstName': 'chloe', 'lastName': 'doh', 'email': 'sakila@gmail.com'},
+	           {'customerId': '3', 'firstName': 'David', 'lastName': 'doh', 'email': 'sakila@gmail.com'},
+	           {'customerId': '4', 'firstName': 'billy', 'lastName': 'doh', 'email': 'sakila@gmail.com'}];
 	beforeEach(module('myApp'));
 	beforeEach(inject(function(_$controller_){
 		$controller = _$controller_;
@@ -21,13 +21,13 @@ describe('CustomerController', function(){
 		var $scope = {};
 		// Mock de service
 		var MockService = {getCustomer: function(){
-			return new Promise(function(resole, reject){
-				resole(tab);
+			return new Promise(function(resolve, reject){
+				resolve(tab);
 			})}
 		};
 		
-		var controller = $controller('StaffController', {$scope: $scope, CustomerService: MockService});
-		controller.fetchAllCustomers()
+		var controller = $controller('CustomerController', {$scope: $scope, CustomerService: MockService});
+		//expect(controller['customers'].length).toEqual(tab.length);
 	});
 	
 	

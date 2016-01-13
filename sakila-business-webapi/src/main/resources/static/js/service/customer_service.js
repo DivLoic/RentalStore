@@ -17,7 +17,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 			)
 		},
 		createCustomer: function(customer){
-			return $http.post('http://localhost:8080/customerCreate/', customer).then(
+			return $http.post('http://localhost:8080/createCustomer/', customer).then(
 					function(response){
 						console.log(response.data);
 						return response.data;
@@ -28,7 +28,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 			)
 		},
 		updateCustomer: function(customer){
-			return $http.post('http://localhost:8080/customerUpdate/', customer).then(
+			return $http.post('http://localhost:8080/updateCustomer/', customer).then(
 					function(reponse){
 						console.log(response.data);
 						return response.data;
