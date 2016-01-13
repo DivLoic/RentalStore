@@ -1,5 +1,7 @@
 package isep.web.sakila.webapi.controller;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,15 @@ public class StaffRestController {
 		}
 		return new ResponseEntity<StaffWO>(staffWOreturn, HttpStatus.OK);
 
+	}
+
+	@RequestMapping(value = "/getstaffs/", method = RequestMethod.GET)
+	public ResponseEntity<String> listAllActors() {
+		List<StaffWO> staffs = staffService.findAllStaffs();
+		// if (actors.isEmpty()) {
+		// return new ResponseEntity<List<ActorWO>>(HttpStatus.NO_CONTENT);
+		// }
+		return new ResponseEntity<String>("test", HttpStatus.OK);
 	}
 
 }

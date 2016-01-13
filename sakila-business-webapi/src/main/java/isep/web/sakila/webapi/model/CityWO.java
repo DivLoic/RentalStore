@@ -1,5 +1,6 @@
 package isep.web.sakila.webapi.model;
 
+import isep.web.sakila.jpa.entities.City;
 import isep.web.sakila.jpa.entities.Country;
 
 public class CityWO extends WebObject {
@@ -17,6 +18,12 @@ public class CityWO extends WebObject {
 		this.cityId = cityId;
 		this.city = city;
 		this.country = country;
+	}
+
+	public CityWO(final City city) {
+		super();
+		this.cityId = city.getCityId();
+		this.city = city.getCity();
 	}
 
 	public int getCityId() {

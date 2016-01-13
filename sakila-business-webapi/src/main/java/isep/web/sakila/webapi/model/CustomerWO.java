@@ -2,6 +2,8 @@ package isep.web.sakila.webapi.model;
 
 import java.util.Date;
 
+import isep.web.sakila.jpa.entities.Customer;
+
 public class CustomerWO extends WebObject {
 
 	protected int customerId;
@@ -40,6 +42,23 @@ public class CustomerWO extends WebObject {
 		this.city_id = city_id;
 		this.postalCode = postalCode;
 		this.phone = phone;
+	}
+
+	public CustomerWO(final Customer customer) {
+		super();
+		this.customerId = customer.getCustomerId();
+		this.store_id = customer.getStore().getStoreId();
+		this.firstName = customer.getFirstName();
+		this.lastName = customer.getLastName();
+		this.email = customer.getEmail();
+		this.active = customer.getActive();
+		this.createDate = customer.getCreateDate();
+		this.address = customer.getAddress().getAddress();
+		this.address2 = customer.getAddress().getAddress2();
+		this.district = customer.getAddress().getDistrict();
+		this.city_id = customer.getAddress().getCity().getCityId();
+		this.postalCode = customer.getAddress().getPostalCode();
+		this.phone = customer.getAddress().getPhone();
 	}
 
 	public int getCustomerId() {

@@ -21,7 +21,7 @@ App.controller('StaffController', ['$scope', 'StaffService', function($scope, St
     
     self.redir = function(status){
     	if (status){
-    		window.location.href="/ActorManagement.html";
+    		window.location.href="/Home.html";
     		console.log('tu seras être redirigé')
     	}else{
     		console.log('tu ne seras pas redirigé')

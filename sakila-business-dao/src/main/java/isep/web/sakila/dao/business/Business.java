@@ -13,6 +13,7 @@ import isep.web.sakila.dao.repositories.CustomerRepository;
 import isep.web.sakila.dao.repositories.StaffRepository;
 import isep.web.sakila.dao.repositories.StoreRepository;
 import isep.web.sakila.jpa.entities.Actor;
+import isep.web.sakila.jpa.entities.Customer;
 
 @Service("business")
 public class Business implements IBusiness {
@@ -35,5 +36,10 @@ public class Business implements IBusiness {
 	@Override
 	public Actor getByID(int actorId) {
 		return actorRepository.findOne(actorId);
+	}
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		return Lists.newArrayList(customerRepository.findAll());
 	}
 }

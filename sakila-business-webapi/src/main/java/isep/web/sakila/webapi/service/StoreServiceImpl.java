@@ -34,7 +34,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public StoreWO findById(int id) {
+	public StoreWO findById(byte id) {
 		log.debug(String.format("Looking for store by Id %s", id));
 		Store store = storeRepository.findOne(id);
 
@@ -56,7 +56,7 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void updateStore(StoreWO storeWO) {
 		byte id = storeWO.getStoreId();
-		Store store = storeRepository.findOne(Integer.valueOf(id));
+		Store store = storeRepository.findOne(storeWO.getStoreId());
 		store.setStoreId(storeWO.getStoreId());
 		store.setStaff(storeWO.getStaff());
 		store.setAddress(storeWO.getAddress());
@@ -64,7 +64,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void deleteStoreById(int id) {
+	public void deleteStoreById(byte id) {
 		storeRepository.delete(id);
 	}
 
