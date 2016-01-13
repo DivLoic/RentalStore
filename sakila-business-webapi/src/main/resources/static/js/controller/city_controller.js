@@ -6,7 +6,7 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 			};
 			self.cities = [];
 
-			self.fetchAllActors = function() {
+			self.fetchAllCities = function() {
 				CityService.fetchAllCities().then(function(d) {
 					self.city = d;
 				}, function(errResponse) {
@@ -15,21 +15,21 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 			};
 
 			self.createCity = function(city) {
-				ActorService.createActor(city).then(self.fetchAllCities,
+				CityService.createCity(city).then(self.fetchAllCities,
 						function(errResponse) {
 							console.error('Error while creating City.');
 						});
 			};
 
 			self.updateCity = function(city) {
-				ActorService.updateActor(city).then(self.fetchAllCities,
+				CityService.updateCity(city).then(self.fetchAllCities,
 						function(errResponse) {
 							console.error('Error while updating City.');
 						});
 			};
 
-			self.deleteActor = function(cityId) {
-				CityService.deleteActor(cityId).then(self.fetchAllCities,
+			self.deleteCity = function(cityId) {
+				CityService.deleteCity(cityId).then(self.fetchAllCities,
 						function(errResponse) {
 							console.error('Error while deleting City.');
 						});
@@ -61,7 +61,7 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 
 			self.remove = function(cityId) {
 				console.log('id to be deleted', cityId);
-				for (var i = 0; i < self.actors.length; i++) {
+				for (var i = 0; i < self.cities.length; i++) {
 					if (self.cities[i].cityId == cityId) {
 						self.reset();
 						break;
