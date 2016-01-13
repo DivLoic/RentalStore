@@ -8,4 +8,12 @@ public interface CityService {
 
 	List<CityWO> findAllCity();
 
+	CityWO findById(int id);
+
+	void saveCity(CityWO cityWO);
+
+	void updateCity(CityWO cityWO);
+
+	void deleteCityById(int id);
+
 }

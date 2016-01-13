@@ -1,6 +1,5 @@
-/**
- * 
- */
+'use strict';
+
 App.factory('CityService', ['$http', '$q', function($http, $q){
 	return {
 		fetchAllCities: function() {

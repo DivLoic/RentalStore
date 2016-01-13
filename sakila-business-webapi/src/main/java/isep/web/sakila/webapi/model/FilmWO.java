@@ -1,7 +1,6 @@
 package isep.web.sakila.webapi.model;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 
 import isep.web.sakila.jpa.entities.Film;
@@ -20,7 +19,6 @@ public class FilmWO extends WebObject {
 	protected BigDecimal replacementCost;
 	protected String rating;
 	protected String specialFeatures;
-	protected Timestamp lastUpdate;
 
 	public FilmWO() {
 		super();
@@ -29,7 +27,7 @@ public class FilmWO extends WebObject {
 
 	public FilmWO(int filmId, String title, String description, Date releaseYear, byte language_id_1,
 			byte language_id_2, byte rentalDuration, BigDecimal rentalRate, int length, BigDecimal replacementCost,
-			String rating, String specialFeatures, Timestamp lastUpdate) {
+			String rating, String specialFeatures) {
 		super();
 		this.filmId = filmId;
 		this.title = title;
@@ -43,7 +41,6 @@ public class FilmWO extends WebObject {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
-		this.lastUpdate = lastUpdate;
 	}
 
 	public FilmWO(final Film film) {
@@ -59,7 +56,6 @@ public class FilmWO extends WebObject {
 		this.replacementCost = film.getReplacementCost();
 		this.rating = film.getRating();
 		this.specialFeatures = film.getSpecialFeatures();
-		this.lastUpdate = film.getLastUpdate();
 	}
 
 	public int getFilmId() {
@@ -156,14 +152,6 @@ public class FilmWO extends WebObject {
 
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
-	}
-
-	public Timestamp getLastUpdate() {
-		return lastUpdate;
-	}
-
-	public void setLastUpdate(Timestamp lastUpdate) {
-		this.lastUpdate = lastUpdate;
 	}
 
 }
