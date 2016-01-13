@@ -13,7 +13,7 @@ App.factory('StaffService', ['$http', '$q', function($http, $q){
 						},
 						function(err){
 							console.log('Erreur du service, logStaff');
-							return err;
+							return $q.reject(err);
 						}
 					);
 			}

@@ -12,7 +12,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 						return response.data;
 					}, function(err){
 						console.log("Erreur du service createCustomer.");
-						return false;
+						return $q.reject(err);
 					}
 			)
 		},
@@ -23,7 +23,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 						return response.data;
 					}, function(err){
 						console.log("Erreur du service createCustomer.");
-						return false;
+						return $q.reject(err);
 					}
 			)
 		},
@@ -34,7 +34,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 						return response.data;
 					}, function(err){
 						console.log("Erreur du service updateCustomer.");
-						return false;
+						return $q.reject(err);
 					}
 			)
 		}

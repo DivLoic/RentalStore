@@ -13,7 +13,7 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 					},
 					function(err){
 						console.log('Erreur du service, getRental: ...');
-						return false;
+						return $q.reject(err);
 					}
 			);
 		},
@@ -27,7 +27,7 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 					},
 					function(err){
 						console.log('Erreur du service, addRental: ...');
-						return false;
+						return $q.reject(err);
 					}
 			);
 		},
@@ -41,7 +41,7 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 					},
 					function(err){
 						console.log('Erreur du service, deleteRental ...');
-						return false;
+						return $q.reject(err);
 					}
 			);
 		}
