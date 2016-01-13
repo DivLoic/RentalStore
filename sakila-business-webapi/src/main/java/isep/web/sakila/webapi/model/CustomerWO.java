@@ -7,12 +7,11 @@ import isep.web.sakila.jpa.entities.Customer;
 public class CustomerWO extends WebObject {
 
 	protected int customerId;
-	protected int store_id;
+	protected byte store_id;
 	protected String firstName;
 	protected String lastName;
 	protected String email;
 	protected byte active;
-	protected Date createDate;
 
 	protected String address;
 	protected String address2;
@@ -25,7 +24,7 @@ public class CustomerWO extends WebObject {
 		super();
 	}
 
-	public CustomerWO(int customerId, int store_id, String firstName, String lastName, String email, byte active,
+	public CustomerWO(int customerId, byte store_id, String firstName, String lastName, String email, byte active,
 			Date createDate, String address, String address2, String district, int city_id, String postalCode,
 			String phone) {
 		super();
@@ -35,7 +34,6 @@ public class CustomerWO extends WebObject {
 		this.lastName = lastName;
 		this.email = email;
 		this.active = active;
-		this.createDate = createDate;
 		this.address = address;
 		this.address2 = address2;
 		this.district = district;
@@ -52,7 +50,6 @@ public class CustomerWO extends WebObject {
 		this.lastName = customer.getLastName();
 		this.email = customer.getEmail();
 		this.active = customer.getActive();
-		this.createDate = customer.getCreateDate();
 		this.address = customer.getAddress().getAddress();
 		this.address2 = customer.getAddress().getAddress2();
 		this.district = customer.getAddress().getDistrict();
@@ -69,11 +66,11 @@ public class CustomerWO extends WebObject {
 		this.customerId = customerId;
 	}
 
-	public int getStore_id() {
+	public byte getStore_id() {
 		return store_id;
 	}
 
-	public void setStore_id(int store_id) {
+	public void setStore_id(byte store_id) {
 		this.store_id = store_id;
 	}
 
@@ -107,14 +104,6 @@ public class CustomerWO extends WebObject {
 
 	public void setActive(byte active) {
 		this.active = active;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
 	}
 
 	public String getAddress() {

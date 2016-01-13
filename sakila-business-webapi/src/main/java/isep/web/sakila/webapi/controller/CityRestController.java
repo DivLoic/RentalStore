@@ -23,8 +23,8 @@ public class CityRestController {
 
 	// -------------------Sign in ----------------------------------
 
-	@RequestMapping(value = "/getcities/", method = RequestMethod.GET)
-	public ResponseEntity<List<CityWO>> listAllActors() {
+	@RequestMapping(value = "/getCities/", method = RequestMethod.GET)
+	public ResponseEntity<List<CityWO>> listAllCities() {
 		List<CityWO> cities = cityService.findAllCity();
 		if (cities.isEmpty()) {
 			System.out.println("vide");

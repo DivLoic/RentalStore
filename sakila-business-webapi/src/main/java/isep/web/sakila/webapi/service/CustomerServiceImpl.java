@@ -1,5 +1,7 @@
 package isep.web.sakila.webapi.service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import isep.web.sakila.dao.repositories.AddressRepository;
 import isep.web.sakila.dao.repositories.CityRepository;
 import isep.web.sakila.dao.repositories.CustomerRepository;
 import isep.web.sakila.dao.repositories.StoreRepository;
@@ -27,16 +30,14 @@ public class CustomerServiceImpl implements CustomerService {
 	private StoreRepository storeRepository;
 	@Autowired
 	private CityRepository cityRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 
 	private static final Log log = LogFactory.getLog(CustomerServiceImpl.class);
 
 	@Override
 	public List<CustomerWO> findAllCustomers() {
 		System.out.println("CustomerService - findAllCustomers");
-
-		// List<Customer> listCusto = (List<Customer>)
-		// customerService.findAll();
-		// System.out.println(listCusto.size());
 
 		List<CustomerWO> customers = new LinkedList<CustomerWO>();
 
@@ -53,8 +54,8 @@ public class CustomerServiceImpl implements CustomerService {
 	public void createCustomer(CustomerWO customerWO) {
 
 		System.out.println("create cust store_id " + customerWO.getStore_id());
-		Store store = storeRepository.findOne(new Byte("1"));
-		//
+		Store store = storeRepository.findOne(customerWO.getStore_id());
+
 		// if (store != null) {
 		// System.out.println("test");
 		// } else {
@@ -65,6 +66,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 		City city = cityRepository.findOne(customerWO.getCity_id());
 
+		System.out.println(customerWO.getAddress() + customerWO.getAddress2() + customerWO.getDistrict()
+				+ customerWO.getPostalCode() + customerWO.getPhone());
 		Address address = new Address();
 		address.setAddress(customerWO.getAddress());
 		address.setAddress2(customerWO.getAddress2());
@@ -72,17 +75,19 @@ public class CustomerServiceImpl implements CustomerService {
 		address.setCity(city);
 		address.setPostalCode(customerWO.getPostalCode());
 		address.setPhone(customerWO.getPhone());
+		address.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+		addressRepository.save(address);
 
-		// Customer customer = new Customer();
-		// customer.setStore(store);
-		// customer.setFirstName(customerWO.getFirstName());
-		// customer.setLastName(customerWO.getLastName());
-		// customer.setEmail(customerWO.getEmail());
-		// customer.setAddress(address);
-		// customer.setActive(customerWO.getActive());
-		// customer.setCreateDate(customerWO.getCreateDate());
-		//
-		// customerService.save(customer);
+		Customer customer = new Customer();
+		customer.setStore(store);
+		customer.setFirstName(customerWO.getFirstName());
+		customer.setLastName(customerWO.getLastName());
+		customer.setEmail(customerWO.getEmail());
+		customer.setAddress(address);
+		customer.setActive(customerWO.getActive());
+		customer.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+		customer.setCreateDate(new Date());
+		customerService.save(customer);
 	}
 
 }

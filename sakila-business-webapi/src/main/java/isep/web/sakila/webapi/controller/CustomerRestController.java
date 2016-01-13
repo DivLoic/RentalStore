@@ -32,7 +32,7 @@ public class CustomerRestController {
 	// -------------------Create a Customer----------------------------------
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@RequestMapping(value = "/customer/", method = RequestMethod.POST)
+	@RequestMapping(value = "/createCustomer/", method = RequestMethod.POST)
 	public ResponseEntity<String> createCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder) {
 		cutomerService.createCustomer(customerWO);
 		// HttpHeaders headers = new HttpHeaders();
