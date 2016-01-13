@@ -4,7 +4,7 @@
 App.factory('CityService', ['$http', '$q', function($http, $q){
 	return {
 		fetchAllCities: function() {
-			return $http.get('http://localhost:8080/getCites/')
+			return $http.get('http://localhost:8080/getCities/')
 			.then(
 					function(response){
 						console.error('Success du service: city');
