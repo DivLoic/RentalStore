@@ -17,7 +17,7 @@ App.factory('CityService', ['$http', '$q', function($http, $q){
 			);
 		},
 		addCity: function(){
-			return $http.get('http://localhost:8080/createCity/')
+			return $http.post('http://localhost:8080/createCity/')
 			.then(
 					function(response){
 						console.error('Success du service: addCity');
@@ -30,7 +30,7 @@ App.factory('CityService', ['$http', '$q', function($http, $q){
 			);
 		},
 		deleteCity: function(){
-			return $http.get('http://localhost:8080/deleteCity/')
+			return $http.post('http://localhost:8080/deleteCity/')
 			.then(
 					function(response){
 						console.error('Success du service: deleteCity');
