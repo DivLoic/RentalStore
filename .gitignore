@@ -55,5 +55,5 @@ node_modules
 
 
 sakila-business-webapi/.settings/org.eclipse.wst.common.project.facet.core.xml
-
+sakila-business-dao/src/main/java/isep/web/sakila/jpa/config/PersistenceConfig.java
 sakila-business-webapi/.settings/org.eclipse.m2e.core.prefs
