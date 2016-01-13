@@ -3,6 +3,20 @@
  */
 App.factory('RentalService', ['$http', '$q', function($http, $q){
 	return {
+		getRental: function(){
+			console.log('Using the Rental Service: getRental.');
+			$http.post('http://localhost:8080/getRentals/').then(
+					function(res){
+						console.log('Sucess du service, getRental: ');
+						console.log(res.data);
+						return res.data
+					},
+					function(err){
+						console.log('Erreur du service, getRental: ...');
+						return false;
+					}
+			);
+		},
 		addRental: function(rent){
 			console.log('Using the Rental Service: addRental.');
 			$http.post('http://localhost:8080/RentalCreate/', rent).then(
