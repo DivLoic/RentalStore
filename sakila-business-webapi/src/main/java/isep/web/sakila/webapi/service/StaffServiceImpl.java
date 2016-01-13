@@ -26,9 +26,10 @@ public class StaffServiceImpl implements StaffService {
 		List<StaffWO> staffs = new LinkedList<StaffWO>();
 
 		for (Staff staff : staffRepository.findAll()) {
-			// staffs.add(new StaffWO(staff));
-			// log.debug("Adding " + staff);
+			staffs.add(new StaffWO(staff));
+			log.debug("Adding " + staff);
 		}
+		System.out.println(staffs.size());
 
 		return staffs;
 	}

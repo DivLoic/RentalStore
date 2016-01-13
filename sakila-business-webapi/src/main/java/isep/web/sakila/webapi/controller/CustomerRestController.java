@@ -1,5 +1,7 @@
 package isep.web.sakila.webapi.controller;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +40,14 @@ public class CustomerRestController {
 
 	}
 
-	@RequestMapping(value = "/customers/", method = RequestMethod.GET)
-	public ResponseEntity<String> listAllCustomers() {
-		// List<StoreWO> list = storeService.findAllStores();
-		// List<CustomerWO> customers = cutomerService.findAllCustomers();
-		// if (customers.isEmpty()) {
-		// return new ResponseEntity<List<CustomerWO>>(HttpStatus.NO_CONTENT);
-		// }
-		return new ResponseEntity<String>("ttt", HttpStatus.OK);
+	@RequestMapping(value = "/getCustomers/", method = RequestMethod.GET)
+	public ResponseEntity<List<CustomerWO>> listAllCustomers() {
+
+		List<CustomerWO> customers = cutomerService.findAllCustomers();
+		if (customers.isEmpty()) {
+			return new ResponseEntity<List<CustomerWO>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<CustomerWO>>(customers, HttpStatus.OK);
 	}
 
 }

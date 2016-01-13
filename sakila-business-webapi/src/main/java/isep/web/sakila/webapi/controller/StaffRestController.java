@@ -43,12 +43,12 @@ public class StaffRestController {
 	}
 
 	@RequestMapping(value = "/getstaffs/", method = RequestMethod.GET)
-	public ResponseEntity<String> listAllActors() {
+	public ResponseEntity<List<StaffWO>> listAllStaffs() {
 		List<StaffWO> staffs = staffService.findAllStaffs();
-		// if (actors.isEmpty()) {
-		// return new ResponseEntity<List<ActorWO>>(HttpStatus.NO_CONTENT);
-		// }
-		return new ResponseEntity<String>("test", HttpStatus.OK);
+		if (staffs.isEmpty()) {
+			return new ResponseEntity<List<StaffWO>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<StaffWO>>(staffs, HttpStatus.OK);
 	}
 
 }

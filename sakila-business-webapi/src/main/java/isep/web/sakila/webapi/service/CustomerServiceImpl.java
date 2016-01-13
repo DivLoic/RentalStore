@@ -33,6 +33,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<CustomerWO> findAllCustomers() {
 		System.out.println("CustomerService - findAllCustomers");
+
+		// List<Customer> listCusto = (List<Customer>)
+		// customerService.findAll();
+		// System.out.println(listCusto.size());
+
 		List<CustomerWO> customers = new LinkedList<CustomerWO>();
 
 		for (Customer cust : customerService.findAll()) {
