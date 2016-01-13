@@ -10,6 +10,7 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
 		CustomerService.getCustomer().then(
 			       function(d) {
 					        self.customers = d;
+					        console.log('success to retieve all customers');
 				       },
 					function(errResponse){
 						console.error('Error while fetching Currencies');
@@ -17,9 +18,24 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
 		       );
 	};
 	
+	self.fetchAllCustomers();
+	
 	self.createCustomer = function(customer){
-		CustomerService.createCustomer(customer);
+		CustomerService.createCustomer(customer).then(
+				self.fetchAllCustomers, function(errResponse){
+					console.error('Error while creating Customer.');
+				});
 	};
+
+   self.updateCustomer = function(customer){
+        CustomerService.updateCustomer(customer)
+        .then(
+                self.fetchAllCustomers, 
+			              function(errResponse){
+				               console.error('Error while updating Customer.');
+			              }	
+            );
+    };
 	
 	self.reset = function(){
         self.actor={actorId:null,lastName:'',firstName:''};
