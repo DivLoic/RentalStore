@@ -1,62 +1,68 @@
 package isep.web.sakila.jpa.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the address database table.
  * 
  */
 @Entity
-@Table(name="address")
-@NamedQuery(name="Address.findAll", query="SELECT a FROM Address a")
+@Table(name = "address")
+@NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="address_id", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "address_id", unique = true, nullable = false)
 	private int addressId;
 
-	@Column(nullable=false, length=50)
+	@Column(nullable = false, length = 50)
 	private String address;
 
-	@Column(length=50)
+	@Column(length = 50)
 	private String address2;
 
-	@Column(nullable=false, length=20)
+	@Column(nullable = false, length = 20)
 	private String district;
 
-	@Column(name="last_update", nullable=false)
+	@Column(name = "last_update", nullable = false)
 	private Timestamp lastUpdate;
 
-	@Column(nullable=false)
-	private String location;
-
-	@Column(nullable=false, length=20)
+	@Column(nullable = false, length = 20)
 	private String phone;
 
-	@Column(name="postal_code", length=10)
+	@Column(name = "postal_code", length = 10)
 	private String postalCode;
 
-	//bi-directional many-to-one association to City
+	// bi-directional many-to-one association to City
 	@ManyToOne
-	@JoinColumn(name="city_id", nullable=false)
+	@JoinColumn(name = "city_id", nullable = false)
 	private City city;
 
-	//bi-directional many-to-one association to Customer
-	@OneToMany(mappedBy="address")
+	// bi-directional many-to-one association to Customer
+	@OneToMany(mappedBy = "address")
 	private List<Customer> customers;
 
-	//bi-directional many-to-one association to Staff
-	@OneToMany(mappedBy="address")
+	// bi-directional many-to-one association to Staff
+	@OneToMany(mappedBy = "address")
 	private List<Staff> staffs;
 
-	//bi-directional many-to-one association to Store
-	@OneToMany(mappedBy="address")
+	// bi-directional many-to-one association to Store
+	@OneToMany(mappedBy = "address")
 	private List<Store> stores;
 
 	public Address() {
@@ -100,14 +106,6 @@ public class Address implements Serializable {
 
 	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
-	}
-
-	public Object getLocation() {
-		return this.location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
 	}
 
 	public String getPhone() {
