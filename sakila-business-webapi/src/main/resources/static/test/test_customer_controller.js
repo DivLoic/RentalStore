@@ -25,9 +25,27 @@ describe('CustomerController', function(){
 				resolve(tab);
 			})}
 		};
+		var controller = null;
+		var allTest = function(){
+			expect(controller['customers'].length).toEqual(tab.length);
+			expect(controller['customers'].length).toEqual(tab.length);
+			['customerId','firstName','lastName','email'].forEach(function(key){
+				controller['customers'].forEach(function(customer){
+					expect(Object.keys(customer)).toContain(key);	
+				});
+			});
+		}
 		
-		var controller = $controller('CustomerController', {$scope: $scope, CustomerService: MockService});
-		//expect(controller['customers'].length).toEqual(tab.length);
+		// because of shitty async stuff
+		async.series([function(){ 
+			controller = $controller(
+					'CustomerController', 
+					{$scope: $scope, CustomerService: MockService}
+			);
+		},
+		allTest
+		]);		
+		
 	});
 	
 	
