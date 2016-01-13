@@ -4,6 +4,10 @@
 describe('CityController', function(){
 	
 	var $controller;
+	var cityTable = [{"cityId":1,"city":"A Corua (La Corua)","country":null},
+	                 {"cityId":2,"city":"Abha","country":null},
+	                 {"cityId":3,"city":"Abu Dhabi","country":null}];
+	
 	beforeEach(module('myApp'));
 	beforeEach(inject(function(_$controller_){
 		$controller = _$controller_;
@@ -16,13 +20,21 @@ describe('CityController', function(){
 	it('should return a list of city', function(){
 		var $scope = {};
 		// Mock de service
-		var MockService = { getCustomer: function(){}
-		};
-		var controller = $controller('CityController', {$scope: $scope, CustomerService: MockService})	;
+		var MockService = { fetchAllCities: function(){
+			return new Promise(function(resolve, reject){
+				resolve(cityTable)
+			});
+		}};
+		
+		var controller =  null;
 		var allTest = function(){
-			
+			expect(controller['cities'].length).toEqual(3);
 		}
 		
+		async.series([function(){
+			controller = $controller('CityController', {$scope: $scope, CustomerService: MockService});
+		},allTest
+		])
 	});
 	
 	
