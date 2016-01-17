@@ -1,5 +1,7 @@
 package isep.web.sakila.webapi.controller;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +26,26 @@ public class InventoryRestController {
 	InventoryService inventoryService;
 	private static final Log log = LogFactory.getLog(InventoryRestController.class);
 
-	// -------------------Sign in ----------------------------------
+	// ------------------- ----------------------------------
 
 	@RequestMapping(value = "/inventory/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<InventoryWO> getInventory(@PathVariable("id") int id) {
-		System.out.println("Fetching City with id " + id);
+		System.out.println("Fetching Inventory with id " + id);
 		InventoryWO inventoryWO = inventoryService.findById(id);
 		if (inventoryWO == null) {
 			System.out.println("Inventory with id " + id + " not found");
 			return new ResponseEntity<InventoryWO>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<InventoryWO>(inventoryWO, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getInventories/", method = RequestMethod.GET)
+	public ResponseEntity<List<InventoryWO>> listAllInventory() {
+		List<InventoryWO> inventories = inventoryService.findAllInventories();
+		if (inventories.isEmpty()) {
+			return new ResponseEntity<List<InventoryWO>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<InventoryWO>>(inventories, HttpStatus.OK);
 	}
 
 	// ---------------------------------------------------------------------------------------------
@@ -51,14 +62,17 @@ public class InventoryRestController {
 	@RequestMapping(value = "/deleteInventory/{id}", method = RequestMethod.GET)
 	public ResponseEntity<InventoryWO> deleteInventory(@PathVariable("id") int id) {
 
-		System.out.println("Fetching & Deleting City with id " + id);
+		System.out.println("Fetching & Deleting Inventory with id " + id);
 
-		InventoryWO inventoryCity = inventoryService.findById(id);
-		if (inventoryCity == null) {
-			System.out.println("Unable to delete. City with id " + id + " not found");
+		InventoryWO inventory = inventoryService.findById(id);
+
+		if (inventory == null) {
+			System.out.println("Unable to delete. Inventory with id " + id + " not found");
 			return new ResponseEntity<InventoryWO>(HttpStatus.NOT_FOUND);
 		}
+		System.out.println("before deleting");
 		inventoryService.deleteInventoryById(id);
+		System.out.println("after deleting");
 		return new ResponseEntity<InventoryWO>(HttpStatus.NO_CONTENT);
 	}
 

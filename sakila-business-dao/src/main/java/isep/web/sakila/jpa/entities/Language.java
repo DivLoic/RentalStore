@@ -1,48 +1,55 @@
 package isep.web.sakila.jpa.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the language database table.
  * 
  */
 @Entity
-@Table(name="language")
-@NamedQuery(name="Language.findAll", query="SELECT l FROM Language l")
+@Table(name = "language")
+@NamedQuery(name = "Language.findAll", query = "SELECT l FROM Language l")
 public class Language implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="language_id", unique=true, nullable=false)
-	private byte languageId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "language_id", unique = true, nullable = false)
+	private int languageId;
 
-	@Column(name="last_update", nullable=false)
+	@Column(name = "last_update", nullable = false)
 	private Timestamp lastUpdate;
 
-	@Column(nullable=false, length=20)
+	@Column(nullable = false, length = 20)
 	private String name;
 
-	//bi-directional many-to-one association to Film
-	@OneToMany(mappedBy="language1")
+	// bi-directional many-to-one association to Film
+	@OneToMany(mappedBy = "language1")
 	private List<Film> films1;
 
-	//bi-directional many-to-one association to Film
-	@OneToMany(mappedBy="language2")
+	// bi-directional many-to-one association to Film
+	@OneToMany(mappedBy = "language2")
 	private List<Film> films2;
 
 	public Language() {
 	}
 
-	public byte getLanguageId() {
+	public int getLanguageId() {
 		return this.languageId;
 	}
 
-	public void setLanguageId(byte languageId) {
+	public void setLanguageId(int languageId) {
 		this.languageId = languageId;
 	}
 

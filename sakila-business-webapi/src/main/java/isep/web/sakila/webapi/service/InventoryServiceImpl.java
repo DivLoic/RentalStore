@@ -1,5 +1,9 @@
 package isep.web.sakila.webapi.service;
 
+import java.sql.Timestamp;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +31,19 @@ public class InventoryServiceImpl implements InventoryService {
 	private static final Log log = LogFactory.getLog(InventoryServiceImpl.class);
 
 	@Override
+	public List<InventoryWO> findAllInventories() {
+		List<InventoryWO> inventories = new LinkedList<InventoryWO>();
+
+		for (Inventory inventory : inventoryRepository.findAll()) {
+			inventories.add(new InventoryWO(inventory));
+		}
+
+		return inventories;
+	}
+
+	@Override
 	public InventoryWO findById(int id) {
-		log.debug(String.format("Looking for inventory by Id %s", id));
+		System.out.println(String.format("Looking for inventory by Id %s", id));
 		Inventory inventory = inventoryRepository.findOne(id);
 
 		if (inventory != null) {
@@ -46,13 +61,14 @@ public class InventoryServiceImpl implements InventoryService {
 
 		inventory.setFilm(film);
 		inventory.setStore(store);
+		inventory.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 
 		inventoryRepository.save(inventory);
 	}
 
 	@Override
 	public void deleteInventoryById(int id) {
-		filmRepository.delete(id);
+		inventoryRepository.delete(id);
 	}
 
 }

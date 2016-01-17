@@ -1,5 +1,7 @@
 package isep.web.sakila.webapi.model;
 
+import isep.web.sakila.jpa.entities.Country;
+
 public class CountryWO extends WebObject {
 
 	protected int countryId;
@@ -8,6 +10,12 @@ public class CountryWO extends WebObject {
 	public CountryWO() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public CountryWO(final Country country) {
+		super();
+		this.countryId = country.getCountryId();
+		this.country = country.getCountry();
 	}
 
 	public CountryWO(int countryId, String country) {

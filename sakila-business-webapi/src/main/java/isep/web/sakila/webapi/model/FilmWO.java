@@ -11,8 +11,8 @@ public class FilmWO extends WebObject {
 	protected String title;
 	protected String description;
 	protected Date releaseYear;
-	protected byte language_id_1;
-	protected byte language_id_2;
+	protected int language_id_1;
+	protected int language_id_2;
 	protected byte rentalDuration;
 	protected BigDecimal rentalRate;
 	protected int length;
@@ -25,9 +25,9 @@ public class FilmWO extends WebObject {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FilmWO(int filmId, String title, String description, Date releaseYear, byte language_id_1,
-			byte language_id_2, byte rentalDuration, BigDecimal rentalRate, int length, BigDecimal replacementCost,
-			String rating, String specialFeatures) {
+	public FilmWO(int filmId, String title, String description, Date releaseYear, int language_id_1, int language_id_2,
+			byte rentalDuration, BigDecimal rentalRate, int length, BigDecimal replacementCost, String rating,
+			String specialFeatures) {
 		super();
 		this.filmId = filmId;
 		this.title = title;
@@ -90,19 +90,19 @@ public class FilmWO extends WebObject {
 		this.releaseYear = releaseYear;
 	}
 
-	public byte getLanguage_id_1() {
+	public int getLanguage_id_1() {
 		return language_id_1;
 	}
 
-	public void setLanguage_id_1(byte language_id_1) {
+	public void setLanguage_id_1(int language_id_1) {
 		this.language_id_1 = language_id_1;
 	}
 
-	public byte getLanguage_id_2() {
+	public int getLanguage_id_2() {
 		return language_id_2;
 	}
 
-	public void setLanguage_id_2(byte language_id_2) {
+	public void setLanguage_id_2(int language_id_2) {
 		this.language_id_2 = language_id_2;
 	}
 

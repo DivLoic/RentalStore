@@ -25,7 +25,7 @@ import isep.web.sakila.webapi.model.CustomerWO;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 	@Autowired
-	private CustomerRepository customerService;
+	private CustomerRepository customerRepository;
 	@Autowired
 	private StoreRepository storeRepository;
 	@Autowired
@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 		List<CustomerWO> customers = new LinkedList<CustomerWO>();
 
-		for (Customer cust : customerService.findAll()) {
+		for (Customer cust : customerRepository.findAll()) {
 			System.out.println(cust.getEmail());
 			customers.add(new CustomerWO(cust));
 			log.debug("Adding " + cust);
@@ -87,7 +87,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setActive(customerWO.getActive());
 		customer.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 		customer.setCreateDate(new Date());
-		customerService.save(customer);
+		customerRepository.save(customer);
 	}
 
 }

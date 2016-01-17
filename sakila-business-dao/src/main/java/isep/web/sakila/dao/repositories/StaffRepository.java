@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import isep.web.sakila.jpa.entities.Staff;
 
-public interface StaffRepository extends JpaRepository<Staff, Integer> {
+public interface StaffRepository extends JpaRepository<Staff, Byte> {
 
 	// @Query(value = "SELECT s FROM staff s WHERE s.username='Mike'")
 	// public List<Staff> findBySearchTermNative();
