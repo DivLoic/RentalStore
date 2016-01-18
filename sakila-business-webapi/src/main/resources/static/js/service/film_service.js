@@ -18,7 +18,7 @@ App.factory('FilmService', ['$http', '$q', function($http, $q){
 					}
 			);
 		},
-		creatFilm: function(film){
+		createFilm: function(film){
 			console.log('Using the Rental Service: creatFilm.');
 			$http.post('http://localhost:8080/createFilm/', film).then(
 					function(res){

@@ -6,6 +6,7 @@
  */
 describe('InventoryController', function(){
 	
+	var tab = [];
 	var $controller;
 	beforeEach(module('myApp'));
 	beforeEach(inject(function(_$controller_){
@@ -19,9 +20,12 @@ describe('InventoryController', function(){
 	it('should return a list of film IN the inventory', function(){
 		var $scope = {};
 		// Mock de service
-		var MockService = { getCustomer: function(){}
+		var MockService = { getInventories: function(){
+			return new Promise(function(resolve, reject){
+				resolve(tab);
+			})}
 		};
-		var controller = $controller('InventoryController', {$scope: $scope, CustomerService: MockService})	;
+		var controller = $controller('InventoryController', {$scope: $scope, InventoryService: MockService})	;
 		var allTest = function(){
 			
 		}

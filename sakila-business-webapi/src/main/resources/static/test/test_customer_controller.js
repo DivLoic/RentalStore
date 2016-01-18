@@ -4,6 +4,8 @@
 describe('CustomerController', function(){
 	
 	var $controller;
+	var newTestCase = function(){console.log("------- ••• -------");};
+	var testCasePass = function(test){console.info(test + ": OK!")}
 	var tab = [{"customerId":1,"store_id":1,"firstName":"MARY","lastName":"SMITH","email":"MARY.SMITH@sakilacustomer.org","active":1,"address":"1913 Hanoi Way","address2":"","district":"Nagasaki","city_id":463,"postalCode":"35200","phone":"28303384290"},
 	           {"customerId":2,"store_id":1,"firstName":"PATRICIA","lastName":"JOHNSON","email":"PATRICIA.JOHNSON@sakilacustomer.org","active":1,"address":"1121 Loja Avenue","address2":"","district":"California","city_id":449,"postalCode":"17886","phone":"838635286649"},
 	           {"customerId":3,"store_id":1,"firstName":"LINDA","lastName":"WILLIAMS","email":"LINDA.WILLIAMS@sakilacustomer.org","active":1,"address":"692 Joliet Street","address2":"","district":"Attika","city_id":38,"postalCode":"83579","phone":"448477190408"},
@@ -21,31 +23,33 @@ describe('CustomerController', function(){
 	it('should return a list of customer', function(){
 		var $scope = {};
 		// Mock de service
-		var MockService = {getCustomer: function(){
+		var MockService = { getCustomer: function(){
 			return new Promise(function(resolve, reject){
 				resolve(tab);
 			})}
 		};
-		var controller = null;
+		
+		var controller = controller = $controller(
+				'CustomerController', 
+				{$scope: $scope, CustomerService: MockService}
+		);
+		
 		var allTest = function(){
-			expect(controller['customers'].length).toEqual(tab.length);
-			expect(controller['customers'].length).toEqual(tab.length);
+			expect(controller['customers'].length).toEqual(6);
+			expect(controller['customers'].length).not.toBe(0);
 			['customerId','firstName','lastName','email'].forEach(function(key){
 				controller['customers'].forEach(function(customer){
 					expect(Object.keys(customer)).toContain(key);	
 				});
 			});
-		}
+			
+		};
 		
-		// because of shitty async stuff
-		async.series([function(){ 
-			controller = $controller(
-					'CustomerController', 
-					{$scope: $scope, CustomerService: MockService}
-			);
-		},
-		allTest
-		]);		
+		setTimeout(function(){
+			newTestCase();
+			allTest();
+			testCasePass('should return a list of customer');
+		}, 500);		
 		
 	});
 	
