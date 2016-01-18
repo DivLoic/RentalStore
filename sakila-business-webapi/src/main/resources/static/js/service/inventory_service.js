@@ -3,23 +3,21 @@
  */
 App.factory('InventoryService', ['$http', '$q', function($http, $q){
 	return {
-		getInventoryByFilm: function(filmId){
-			console.log('Using the Inventory Service: getInventory.');
-			// http://localhost:8080/getInventoryByFilm/
-			return $http.get('http://localhost:8080/' + filmId ).then(
+		getInventoriesByFilmId: function(filmId){
+			console.log('Using the Inventory Service: getInventoriesByFilmId.');
+			return $http.get('http://localhost:8080/getInventoriesByFilmId/' + filmId).then(
 					function(res){
-						console.log('Sucess du service, getInventory ');
+						console.log('Sucess du service, getInventoriesByFilmId ');
 						console.log(res.data);
-						return [1,2,3]
-						//return res.data;
+						return res.data;
 					},
 					function(err){
-						console.log('Erreur du service, getInventory ');
+						console.log('Erreur du service, getInventoriesByFilmId ');
 						console.log(err);
 						return $q.reject(err);
 					}
 			);
-		},
+		
 		getInventories: function(){
 			console.log('Using the Inventory Service: getInventories.');
 			return $http.get('http://localhost:8080/getInventories/').then(
