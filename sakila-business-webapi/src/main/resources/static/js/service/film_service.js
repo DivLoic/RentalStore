@@ -3,9 +3,9 @@
  */
 App.factory('FilmService', ['$http', '$q', function($http, $q){
 	return {
-		getFilm: function(){
+		getFilms: function(){
 			console.log('Using the Rental Service: getFilm.');
-			$http.get('http://localhost:8080/getFilms/').then(
+			return $http.get('http://localhost:8080/getFilms/').then(
 					function(res){
 						console.log('Sucess du service, getFilm ');
 						console.log(res.data);
@@ -20,7 +20,7 @@ App.factory('FilmService', ['$http', '$q', function($http, $q){
 		},
 		createFilm: function(film){
 			console.log('Using the Rental Service: creatFilm.');
-			$http.post('http://localhost:8080/createFilm/', film).then(
+			return  $http.post('http://localhost:8080/createFilm/', film).then(
 					function(res){
 						console.log('Sucess du service, creatFilm ');
 						console.log(res.data)
@@ -35,7 +35,7 @@ App.factory('FilmService', ['$http', '$q', function($http, $q){
 		},
 		deleteFilm: function(id){
 			console.log('Using the Rental Service: deleteFilm.');
-			$http.post('http://localhost:8080/deleteFilm/' + id).then(
+			return $http.post('http://localhost:8080/deleteFilm/' + id).then(
 					function(res){
 						console.log('Sucess du service, deleteFilm ');
 						console.log(res.data);
@@ -50,7 +50,7 @@ App.factory('FilmService', ['$http', '$q', function($http, $q){
 		},
 		updateFilm: function(film){
 			console.log('Using the Rental Service: updateFilm.');
-			$http.post('http://localhost:8080/updateFilm/', film).then(
+			return $http.post('http://localhost:8080/updateFilm/', film).then(
 					function(res){
 						console.log('Sucess du service, updateFilm ');
 						console.log(res.data);
