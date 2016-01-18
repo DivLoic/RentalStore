@@ -5,11 +5,13 @@ App.factory('InventoryService', ['$http', '$q', function($http, $q){
 	return {
 		getInventoryByFilm: function(filmId){
 			console.log('Using the Inventory Service: getInventory.');
-			return $http.get('http://localhost:8080/getInventoryByFilm/' + filmId ).then(
+			// http://localhost:8080/getInventoryByFilm/
+			return $http.get('http://localhost:8080/' + filmId ).then(
 					function(res){
 						console.log('Sucess du service, getInventory ');
 						console.log(res.data);
-						return res.data;
+						return [1,2,3]
+						//return res.data;
 					},
 					function(err){
 						console.log('Erreur du service, getInventory ');
