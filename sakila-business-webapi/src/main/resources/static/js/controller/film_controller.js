@@ -47,11 +47,11 @@ App.controller('FilmController', ['$scope', 'FilmService', function($scope, Film
 	
 	self.fetchAllFilms();
 	
-	self.addAvaibility(allFilms, allInventories){
+	self.addAvaibility = function(allFilms, allInventories){
 		allFilms.forEach(function(film){
 			var filtered = allInventories.filter(function(allInventory){
 				allInventory['filmId'] == film['filmId']
-			}
+			});
 			film['quantity'] = filtered.length;
 		});
 		return allFilms;
