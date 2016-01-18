@@ -1,78 +1,86 @@
 package isep.web.sakila.jpa.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the film database table.
  * 
  */
 @Entity
-@Table(name="film")
-@NamedQuery(name="Film.findAll", query="SELECT f FROM Film f")
+@Table(name = "film")
+@NamedQuery(name = "Film.findAll", query = "SELECT f FROM Film f")
 public class Film implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="film_id", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "film_id", unique = true, nullable = false)
 	private int filmId;
 
 	@Lob
 	private String description;
 
-	@Column(name="last_update", nullable=false)
+	@Column(name = "last_update", nullable = false)
 	private Timestamp lastUpdate;
 
 	private int length;
 
-	@Column(length=1)
+	@Column(length = 1)
 	private String rating;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="release_year")
-	private Date releaseYear;
+	@Column(name = "release_year")
+	private int releaseYear;
 
-	@Column(name="rental_duration", nullable=false)
+	@Column(name = "rental_duration", nullable = false)
 	private byte rentalDuration;
 
-	@Column(name="rental_rate", nullable=false, precision=10, scale=2)
+	@Column(name = "rental_rate", nullable = false, precision = 10, scale = 2)
 	private BigDecimal rentalRate;
 
-	@Column(name="replacement_cost", nullable=false, precision=10, scale=2)
+	@Column(name = "replacement_cost", nullable = false, precision = 10, scale = 2)
 	private BigDecimal replacementCost;
 
-	@Column(name="special_features")
+	@Column(name = "special_features")
 	private String specialFeatures;
 
-	@Column(nullable=false, length=255)
+	@Column(nullable = false, length = 255)
 	private String title;
 
-	//bi-directional many-to-one association to Language
+	// bi-directional many-to-one association to Language
 	@ManyToOne
-	@JoinColumn(name="language_id", nullable=false)
+	@JoinColumn(name = "language_id", nullable = false)
 	private Language language1;
 
-	//bi-directional many-to-one association to Language
+	// bi-directional many-to-one association to Language
 	@ManyToOne
-	@JoinColumn(name="original_language_id")
+	@JoinColumn(name = "original_language_id")
 	private Language language2;
 
-	//bi-directional many-to-one association to FilmActor
-	@OneToMany(mappedBy="film")
+	// bi-directional many-to-one association to FilmActor
+	@OneToMany(mappedBy = "film")
 	private List<FilmActor> filmActors;
 
-	//bi-directional many-to-one association to FilmCategory
-	@OneToMany(mappedBy="film")
+	// bi-directional many-to-one association to FilmCategory
+	@OneToMany(mappedBy = "film")
 	private List<FilmCategory> filmCategories;
 
-	//bi-directional many-to-one association to Inventory
-	@OneToMany(mappedBy="film")
+	// bi-directional many-to-one association to Inventory
+	@OneToMany(mappedBy = "film")
 	private List<Inventory> inventories;
 
 	public Film() {
@@ -118,11 +126,11 @@ public class Film implements Serializable {
 		this.rating = rating;
 	}
 
-	public Date getReleaseYear() {
+	public int getReleaseYear() {
 		return this.releaseYear;
 	}
 
-	public void setReleaseYear(Date releaseYear) {
+	public void setReleaseYear(int releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 

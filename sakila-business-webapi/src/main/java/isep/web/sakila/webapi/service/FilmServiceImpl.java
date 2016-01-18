@@ -1,6 +1,7 @@
 package isep.web.sakila.webapi.service;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,9 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import isep.web.sakila.dao.repositories.ActorRepository;
+import isep.web.sakila.dao.repositories.FilmActorRepository;
+import isep.web.sakila.dao.repositories.FilmCategoryRepository;
 import isep.web.sakila.dao.repositories.FilmRepository;
 import isep.web.sakila.dao.repositories.LanguageRepository;
+import isep.web.sakila.jpa.entities.Actor;
 import isep.web.sakila.jpa.entities.Film;
+import isep.web.sakila.jpa.entities.FilmActor;
+import isep.web.sakila.jpa.entities.FilmActorPK;
+import isep.web.sakila.jpa.entities.FilmCategory;
+import isep.web.sakila.jpa.entities.FilmCategoryPK;
 import isep.web.sakila.jpa.entities.Language;
 import isep.web.sakila.webapi.model.FilmWO;
 
@@ -23,8 +32,16 @@ public class FilmServiceImpl implements FilmService {
 	private FilmRepository filmRepository;
 	@Autowired
 	private LanguageRepository languageRepository;
+	@Autowired
+	private ActorRepository actorRepository;
+	@Autowired
+	private FilmActorRepository filmActorRepository;
+	@Autowired
+	private FilmCategoryRepository filmCategoryRepository;
 
 	private static final Log log = LogFactory.getLog(FilmServiceImpl.class);
+
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
 
 	@Override
 	public List<FilmWO> findAllFilm() {
@@ -54,7 +71,7 @@ public class FilmServiceImpl implements FilmService {
 		Film film = new Film();
 		film.setTitle(filmWO.getTitle());
 		film.setDescription(filmWO.getDescription());
-		film.setReleaseYear(filmWO.getReleaseYear());
+		film.setReleaseYear(Integer.parseInt(filmWO.getReleaseYear()));
 
 		Language language1 = languageRepository.findOne(filmWO.getLanguage_id_1());
 		film.setLanguage1(language1);
@@ -67,16 +84,50 @@ public class FilmServiceImpl implements FilmService {
 		film.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 
 		filmRepository.save(film);
+
+		System.out.println(film.getFilmId());
+
+		// save actors
+		for (Integer listIdActor : filmWO.getListIdActor()) {
+			Actor actor = actorRepository.findOne(listIdActor);
+
+			FilmActorPK pk = new FilmActorPK();
+			pk.setActorId(listIdActor);
+			pk.setFilmId(film.getFilmId());
+
+			FilmActor filmActor = new FilmActor();
+			filmActor.setId(pk);
+			filmActor.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+			filmActorRepository.save(filmActor);
+		}
+
+		// save categories
+		for (Integer listIdCategory : filmWO.getListIdCategory()) {
+
+			System.out.println(listIdCategory);
+			FilmCategoryPK pk = new FilmCategoryPK();
+
+			pk.setCategoryId(Byte.valueOf(Integer.toString(listIdCategory)));
+			pk.setFilmId(film.getFilmId());
+
+			FilmCategory filmCategory = new FilmCategory();
+			filmCategory.setId(pk);
+			filmCategory.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+			filmCategoryRepository.save(filmCategory);
+		}
+
 	}
 
 	@Override
 	public void updateFilm(FilmWO filmWO) {
+
 		Film film = filmRepository.findOne(filmWO.getFilmId());
 		film.setTitle(filmWO.getTitle());
 		film.setDescription(filmWO.getDescription());
-		film.setReleaseYear(filmWO.getReleaseYear());
+		film.setReleaseYear(Integer.parseInt(filmWO.getReleaseYear()));
 
 		Language language1 = languageRepository.findOne(filmWO.getLanguage_id_1());
+
 		film.setLanguage1(language1);
 		film.setRentalDuration(filmWO.getRentalDuration());
 		film.setRentalRate(filmWO.getRentalRate());
@@ -86,6 +137,7 @@ public class FilmServiceImpl implements FilmService {
 		film.setSpecialFeatures(filmWO.getSpecialFeatures());
 		film.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 		filmRepository.save(film);
+
 	}
 
 	@Override

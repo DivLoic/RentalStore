@@ -42,6 +42,17 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
+	public List<InventoryWO> findAllInventoriesByIdFilm(int id_film) {
+		List<InventoryWO> inventories = new LinkedList<InventoryWO>();
+
+		for (Inventory inventory : inventoryRepository.findAllInventoriesByIdFilm(filmRepository.findOne(id_film))) {
+			inventories.add(new InventoryWO(inventory));
+		}
+
+		return inventories;
+	}
+
+	@Override
 	public InventoryWO findById(int id) {
 		System.out.println(String.format("Looking for inventory by Id %s", id));
 		Inventory inventory = inventoryRepository.findOne(id);

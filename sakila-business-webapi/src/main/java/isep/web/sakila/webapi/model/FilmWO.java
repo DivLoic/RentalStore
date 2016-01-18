@@ -1,7 +1,8 @@
 package isep.web.sakila.webapi.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import isep.web.sakila.jpa.entities.Film;
 
@@ -10,7 +11,7 @@ public class FilmWO extends WebObject {
 	protected int filmId;
 	protected String title;
 	protected String description;
-	protected Date releaseYear;
+	protected String releaseYear;
 	protected int language_id_1;
 	protected int language_id_2;
 	protected byte rentalDuration;
@@ -19,15 +20,19 @@ public class FilmWO extends WebObject {
 	protected BigDecimal replacementCost;
 	protected String rating;
 	protected String specialFeatures;
+	protected ArrayList<Integer> listIdActor;
+	protected ArrayList<Integer> listIdCategory;
+
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
 
 	public FilmWO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public FilmWO(int filmId, String title, String description, Date releaseYear, int language_id_1, int language_id_2,
-			byte rentalDuration, BigDecimal rentalRate, int length, BigDecimal replacementCost, String rating,
-			String specialFeatures) {
+	public FilmWO(int filmId, String title, String description, String releaseYear, int language_id_1,
+			int language_id_2, byte rentalDuration, BigDecimal rentalRate, int length, BigDecimal replacementCost,
+			String rating, String specialFeatures, ArrayList<Integer> listIdActor, ArrayList<Integer> listIdCategory) {
 		super();
 		this.filmId = filmId;
 		this.title = title;
@@ -41,6 +46,8 @@ public class FilmWO extends WebObject {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
+		this.listIdActor = listIdActor;
+		this.listIdCategory = listIdCategory;
 	}
 
 	public FilmWO(final Film film) {
@@ -48,7 +55,7 @@ public class FilmWO extends WebObject {
 		this.filmId = film.getFilmId();
 		this.title = film.getTitle();
 		this.description = film.getDescription();
-		this.releaseYear = film.getReleaseYear();
+		this.releaseYear = formatter.format(film.getReleaseYear());
 		this.language_id_1 = film.getLanguage1().getLanguageId();
 		this.rentalDuration = film.getRentalDuration();
 		this.rentalRate = film.getRentalRate();
@@ -82,11 +89,11 @@ public class FilmWO extends WebObject {
 		this.description = description;
 	}
 
-	public Date getReleaseYear() {
+	public String getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(Date releaseYear) {
+	public void setReleaseYear(String releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
@@ -152,6 +159,22 @@ public class FilmWO extends WebObject {
 
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
+	}
+
+	public ArrayList<Integer> getListIdActor() {
+		return listIdActor;
+	}
+
+	public void setListIdActor(ArrayList<Integer> listIdActor) {
+		this.listIdActor = listIdActor;
+	}
+
+	public ArrayList<Integer> getListIdCategory() {
+		return listIdCategory;
+	}
+
+	public void setListIdCategory(ArrayList<Integer> listIdCategory) {
+		this.listIdCategory = listIdCategory;
 	}
 
 }

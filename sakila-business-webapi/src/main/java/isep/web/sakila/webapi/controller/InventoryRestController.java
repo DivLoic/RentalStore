@@ -48,6 +48,14 @@ public class InventoryRestController {
 		return new ResponseEntity<List<InventoryWO>>(inventories, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/getInventoryByIdFilm/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<InventoryWO>> getInventoryByIdFilm(@PathVariable("id") int id) {
+
+		List<InventoryWO> inventories = inventoryService.findAllInventoriesByIdFilm(id);
+
+		return new ResponseEntity<List<InventoryWO>>(inventories, HttpStatus.CREATED);
+	}
+
 	// ---------------------------------------------------------------------------------------------
 
 	@RequestMapping(value = "/createInventory/", method = RequestMethod.POST)
