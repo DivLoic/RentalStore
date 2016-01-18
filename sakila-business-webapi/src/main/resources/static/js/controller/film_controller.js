@@ -3,7 +3,7 @@
  */
 App.controller('FilmController', ['$scope', 'FilmService', function($scope, FilmService) {
 	var self = this;
-	var film = {};
+	var film = {filmId:0, title:'', length: 0};
 	var films = [];
 	
 	self.fetchAllFilms = function(){
@@ -46,5 +46,15 @@ App.controller('FilmController', ['$scope', 'FilmService', function($scope, Film
 	};
 	
 	self.fetchAllFilms();
+	
+	self.addAvaibility(allFilms, allInventories){
+		allFilms.forEach(film){
+			var filtered = allInventories.filter(function(allInventory){
+				allInventory['filmId'] == film['filmId']
+			}
+			film['quantity'] = filtered.length;
+		}
+		return allFilms;
+	}
 	
 }]);

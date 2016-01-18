@@ -29,28 +29,24 @@ describe('CustomerController', function(){
 			})}
 		};
 		
-		var controller = controller = $controller(
+		var controller = $controller(
 				'CustomerController', 
 				{$scope: $scope, CustomerService: MockService}
 		);
 		
-		var allTest = function(){
-			expect(controller['customers'].length).toEqual(6);
-			expect(controller['customers'].length).not.toBe(0);
-			['customerId','firstName','lastName','email'].forEach(function(key){
-				controller['customers'].forEach(function(customer){
-					expect(Object.keys(customer)).toContain(key);	
-				});
-			});
-			
-		};
-		
 		setTimeout(function(){
 			newTestCase();
-			allTest();
+			(function(){
+				expect(controller['customers'].length).toEqual(6);
+				expect(controller['customers'].length).not.toBe(0);
+				['customerId','firstName','lastName','email'].forEach(function(key){
+					controller['customers'].forEach(function(customer){
+						expect(Object.keys(customer)).toContain(key);	
+					});
+				})
+			})();
 			testCasePass('should return a list of customer');
-		}, 500);		
-		
+		}, 500);
 	});
 	
 	
