@@ -101,7 +101,7 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 
 
 	self.reset = function(){
-		self.film={filmId:null,lastName:'',firstName:''};
+		self.film={filmId:null,title:'',description:'', releaseYear:'', rentalDuration:'', rentalRate:'', lenght:'', language:null, features:''};
 		$scope.myForm.$setPristine(); //reset Form
 	};
 
