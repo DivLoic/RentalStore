@@ -56,7 +56,7 @@ public class FilmRestController {
 		System.out.println("Creating Film " + filmWO.getTitle());
 		filmService.saveFilm(filmWO);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/actor/{id}").buildAndExpand(filmWO.getFilmId()).toUri());
+		headers.setLocation(ucBuilder.path("/film/{id}").buildAndExpand(filmWO.getFilmId()).toUri());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 

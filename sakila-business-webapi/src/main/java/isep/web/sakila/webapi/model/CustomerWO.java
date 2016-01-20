@@ -13,6 +13,7 @@ public class CustomerWO extends WebObject {
 	protected String email;
 	protected byte active;
 
+	protected int addressId;
 	protected String address;
 	protected String address2;
 	protected String district;
@@ -25,8 +26,8 @@ public class CustomerWO extends WebObject {
 	}
 
 	public CustomerWO(int customerId, byte store_id, String firstName, String lastName, String email, byte active,
-			Date createDate, String address, String address2, String district, int city_id, String postalCode,
-			String phone) {
+			Date createDate, int addressId, String address, String address2, String district, int city_id,
+			String postalCode, String phone) {
 		super();
 		this.customerId = customerId;
 		this.store_id = store_id;
@@ -34,6 +35,7 @@ public class CustomerWO extends WebObject {
 		this.lastName = lastName;
 		this.email = email;
 		this.active = active;
+		this.addressId = addressId;
 		this.address = address;
 		this.address2 = address2;
 		this.district = district;
@@ -50,6 +52,7 @@ public class CustomerWO extends WebObject {
 		this.lastName = customer.getLastName();
 		this.email = customer.getEmail();
 		this.active = customer.getActive();
+		this.addressId = customer.getAddress().getAddressId();
 		this.address = customer.getAddress().getAddress();
 		this.address2 = customer.getAddress().getAddress2();
 		this.district = customer.getAddress().getDistrict();
@@ -152,6 +155,14 @@ public class CustomerWO extends WebObject {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public int getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
 	}
 
 }
