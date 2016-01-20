@@ -4,13 +4,18 @@
 
 App.controller('InventoryController', ['$scope', 'InventoryService', function($scope, InventoryService) {
 	var self = this;
-	var inventory = {};
+	var inventory = {
+		inventory_id: '',
+		film_id: '',
+		store_id: '',
+		last_update:''
+	};
 	var inventories = [];
 	
 	self.fetchAllInventories = function(){
 		InventoryService.getInventories().then(
 			function(res){
-				self.films = res;
+				self.inventories = res;
 			},
 			function(err){
 				console.log("Error: controller failed to get the inventories");

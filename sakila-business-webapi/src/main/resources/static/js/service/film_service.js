@@ -3,7 +3,7 @@
  */
 App.factory('FilmService', ['$http', '$q', function($http, $q){
 	return {
-		getFilms: function(){
+		fetchAllFilms: function(){
 			console.log('Using the Rental Service: getFilm.');
 			return $http.get('http://localhost:8080/getFilms/').then(
 					function(res){

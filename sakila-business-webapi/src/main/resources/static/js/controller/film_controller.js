@@ -58,7 +58,7 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 
 	self.setQuantity = function(){
 		self.films.forEach(function(film){
-			InventoryService.getInventoriesByFilmId(flim['filmId']).then(
+			InventoryService.getInventoriesByFilmId(film['filmId']).then(
 				function(res){
 						film['quantity'] = res.length;
 				}
