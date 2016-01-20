@@ -1,5 +1,6 @@
 package isep.web.sakila.webapi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -17,13 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import isep.web.sakila.webapi.model.InventoryWO;
+import isep.web.sakila.webapi.model.RentalWO;
 import isep.web.sakila.webapi.service.InventoryService;
+import isep.web.sakila.webapi.service.RentalService;
 
 @RestController
 public class InventoryRestController {
 
 	@Autowired
 	InventoryService inventoryService;
+
+	@Autowired
+	RentalService rentalService;
+
 	private static final Log log = LogFactory.getLog(InventoryRestController.class);
 
 	// ------------------- ----------------------------------
@@ -49,11 +56,31 @@ public class InventoryRestController {
 	}
 
 	@RequestMapping(value = "/getInventoryByIdFilm/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<InventoryWO>> getInventoryByIdFilm(@PathVariable("id") int id) {
+	public ResponseEntity<Integer> getInventoryByIdFilm(@PathVariable("id") int id) {
 
 		List<InventoryWO> inventories = inventoryService.findAllInventoriesByIdFilm(id);
 
-		return new ResponseEntity<List<InventoryWO>>(inventories, HttpStatus.CREATED);
+		System.out.println("inventories size : " + inventories.size());
+		// List<Integer> listRentalId = new ArrayList<Integer>();
+		// listRentalId.add(new Integer(1));
+		// listRentalId.add(new Integer(2));
+
+		List<Integer> listInventory = new ArrayList<Integer>();
+
+		for (InventoryWO inv : inventories) {
+			listInventory.add(inv.getInventoryId());
+		}
+
+		List<RentalWO> toto = rentalService.findByIdInventory(listInventory);
+
+		if (toto.isEmpty()) {
+
+			System.out.println("vide");
+			return new ResponseEntity<Integer>(inventories.size(), HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<Integer>(inventories.size() - toto.size(), HttpStatus.CREATED);
+		}
+
 	}
 
 	// ---------------------------------------------------------------------------------------------

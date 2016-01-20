@@ -3,6 +3,7 @@ package isep.web.sakila.webapi.service;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -59,6 +60,25 @@ public class RentalServiceImpl implements RentalService {
 			return new RentalWO(rental);
 		}
 		return null;
+	}
+
+	@Override
+	public List<RentalWO> findByIdInventory(List<Integer> listIdInteger) {
+		List<RentalWO> rentals = new LinkedList<RentalWO>();
+
+		List<Inventory> listInventory = new ArrayList<Inventory>();
+
+		for (int j = 0; j < listIdInteger.size(); j++) {
+			System.out.println(listIdInteger.get(j));
+			Inventory inventory1 = inventoryRepository.findOne(listIdInteger.get(j));
+			listInventory.add(inventory1);
+		}
+
+		for (Rental rental : rentalRepository.findAllRentalByIdInventory(listInventory)) {
+			rentals.add(new RentalWO(rental));
+			System.out.println(rental.getRentalId());
+		}
+		return rentals;
 	}
 
 	@Override

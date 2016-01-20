@@ -9,6 +9,8 @@ public interface RentalService {
 
 	RentalWO findById(int id);
 
+	List<RentalWO> findByIdInventory(List<Integer> id);
+
 	void saveRental(RentalWO rentalWO) throws ParseException;
 
 	void deleteRentalById(int id);

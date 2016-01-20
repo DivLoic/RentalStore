@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import isep.web.sakila.webapi.model.RentalWO;
+import isep.web.sakila.webapi.service.InventoryService;
 import isep.web.sakila.webapi.service.RentalService;
 
 @RestController
@@ -25,6 +26,10 @@ public class RentalRestController {
 
 	@Autowired
 	RentalService rentalService;
+
+	@Autowired
+	InventoryService inventoryService;
+
 	private static final Log log = LogFactory.getLog(RentalRestController.class);
 
 	// ------------------- ----------------------------------
@@ -55,6 +60,7 @@ public class RentalRestController {
 	public ResponseEntity<Void> createRental(@RequestBody RentalWO rentalWO, UriComponentsBuilder ucBuilder)
 			throws ParseException {
 		System.out.println("Creating Rental " + rentalWO.getRentalId());
+
 		rentalService.saveRental(rentalWO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/rental/{id}").buildAndExpand(rentalWO.getRentalId()).toUri());

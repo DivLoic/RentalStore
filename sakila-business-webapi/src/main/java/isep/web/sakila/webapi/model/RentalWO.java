@@ -21,7 +21,10 @@ public class RentalWO extends WebObject {
 		this.rentalDate = formatter.format(rental.getRentalDate());
 		this.inventoryId = rental.getInventory().getInventoryId();
 		this.customerId = rental.getCustomer().getCustomerId();
-		this.returnDate = formatter.format(rental.getReturnDate());
+		if (rental.getReturnDate() != null) {
+			this.returnDate = formatter.format(rental.getReturnDate());
+		}
+
 		this.staffId = rental.getStaff().getStaffId();
 	}
 
