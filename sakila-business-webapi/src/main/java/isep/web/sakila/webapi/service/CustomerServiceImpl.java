@@ -36,6 +36,44 @@ public class CustomerServiceImpl implements CustomerService {
 	private static final Log log = LogFactory.getLog(CustomerServiceImpl.class);
 
 	@Override
+	public CustomerWO findById(int id) {
+		log.debug(String.format("Looking for customer by Id %s", id));
+		Customer customer = customerRepository.findOne(id);
+
+		if (customer != null) {
+			return new CustomerWO(customer);
+		}
+		return null;
+	}
+
+	@Override
+	public void updateCustomer(CustomerWO customerWO) {
+
+		Store store = storeRepository.findOne(customerWO.getStore_id());
+		City city = cityRepository.findOne(customerWO.getCity_id());
+
+		Customer customer = customerRepository.findOne(customerWO.getCustomerId());
+		customer.setStore(store);
+		customer.setFirstName(customerWO.getFirstName());
+		customer.setLastName(customerWO.getLastName());
+		customer.setEmail(customerWO.getEmail());
+		customer.setActive(customerWO.getActive());
+		customer.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+		customerRepository.save(customer);
+
+		Address address = addressRepository.findOne(customerWO.getAddressId());
+		address.setAddress(customerWO.getAddress());
+		address.setAddress2(customerWO.getAddress2());
+		address.setDistrict(customerWO.getDistrict());
+		address.setCity(city);
+		address.setPostalCode(customerWO.getPostalCode());
+		address.setPhone(customerWO.getPhone());
+		address.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+		addressRepository.save(address);
+
+	}
+
+	@Override
 	public List<CustomerWO> findAllCustomers() {
 		System.out.println("CustomerService - findAllCustomers");
 
@@ -55,14 +93,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 		System.out.println("create cust store_id " + customerWO.getStore_id());
 		Store store = storeRepository.findOne(customerWO.getStore_id());
-
-		// if (store != null) {
-		// System.out.println("test");
-		// } else {
-		// System.out.println("test 2");
-		// }
-		// System.out.println("store manager staff id : " +
-		// store.getLastUpdate());
 
 		City city = cityRepository.findOne(customerWO.getCity_id());
 
