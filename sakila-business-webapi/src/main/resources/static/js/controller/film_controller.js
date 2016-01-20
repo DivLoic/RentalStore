@@ -10,7 +10,7 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 		FilmService.getFilms().then(
 			function(res){
 				self.films = res;
-				//self.setQuantity();
+				self.setQuantity();
 			},
 			function(err){
 				console.log("Error: controller failed to get the films");
@@ -50,7 +50,7 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 	
 	self.setQuantity = function(){
 		self.films.forEach(function(film){
-			InventoryService.getInventoriesByFilmId(flim['filmId']).then(
+			InventoryService.getInventoriesByFilmId(film['filmId']).then(
 				function(res){
 						film['quantity'] = res.length;
 				}
