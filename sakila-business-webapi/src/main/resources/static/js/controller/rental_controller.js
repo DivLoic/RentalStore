@@ -3,7 +3,7 @@
 App.controller('RentalController', ['$scope', 'RentalService', 'FilmService', 'CustomerService', function($scope, RentalService, FilmService, CustomerService) {
 	var self = this;
 	self.currentRentalName = ''
-    self.rental={rentalId:null, rentalDate:'',customerId:'',returnDate:'',staffId:'', inventoryId:''};
+    self.rental={rentalId:null, rentalDate:'',customerId:'',returnDate:'',staffId:'1', inventoryId:''};
     self.rentals=[];
     
     self.customer={customerId:null,firstName:'',lastName:'',email:'',phone:'',
@@ -27,12 +27,14 @@ App.controller('RentalController', ['$scope', 'RentalService', 'FilmService', 'C
 	
 	self.submit = function(){
 		if(self.rental.inventoryId != null){
-			console.log("-----------> " + self.rental.rentalDate);
-			console.log("-----------> " + self.rental.returnDate);
-			console.log("-----------> " + self.rental.inventoryId);
-			console.log("-----------> " + self.rental.customerId);
-			self.saveRental(self.rental);
+			var rent = angular.copy(self.rental);
+			rent.rentalDate = rent.rentalDate+" 00:00:00";
+			rent.returnDate = rent.returnDate+" 00:00:00";
+			self.saveRental(rent);
+			
 		}
+		
+		
 	};
 	
 	/**
