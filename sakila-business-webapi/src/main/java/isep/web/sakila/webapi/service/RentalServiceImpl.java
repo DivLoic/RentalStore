@@ -92,7 +92,9 @@ public class RentalServiceImpl implements RentalService {
 		rental.setRentalDate(formatter.parse(rentalWO.getRentalDate()));
 		rental.setInventory(inventory);
 		rental.setCustomer(customer);
-		rental.setReturnDate(formatter.parse(rentalWO.getReturnDate()));
+		if (rentalWO.getReturnDate() != null) {
+			rental.setReturnDate(formatter.parse(rentalWO.getReturnDate()));
+		}
 		rental.setStaff(staff);
 		rental.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 		rentalRepository.save(rental);
