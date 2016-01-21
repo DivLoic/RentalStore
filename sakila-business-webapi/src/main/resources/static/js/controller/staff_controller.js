@@ -8,10 +8,13 @@ App.controller('StaffController', ['$scope', '$cookieStore', 'StaffService', fun
 	self.submit = function(callBack) {
         StaffService.logStaff(self.staff).then(
     		function(data){
-    			$cookieStore.put('staff_id', data.staffId);
-    			//$cookieStore.put('store_id',data.store_id);
-    			$cookieStore.put('username',data.username);
     			var status = data.username == null ? false : true;
+    			if(status){
+    				$cookieStore.put('staff_id', data.staffId);
+        			$cookieStore.put('store_id',data.storeId);
+        			$cookieStore.put('username',data.username);
+    			}
+    			//easy testable status
     			callBack(status);
     		});
     };
@@ -22,7 +25,7 @@ App.controller('StaffController', ['$scope', '$cookieStore', 'StaffService', fun
     	}else{
     		alert("Wrong username or password.");
     	}
-    }
+    };
     
     self.reset = function(){
     	self.staff={username:'', password:''};
