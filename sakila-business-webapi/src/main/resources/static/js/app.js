@@ -6,14 +6,15 @@ App.controller('AuthController', ['$scope', '$cookieStore', '$location', functio
 	var self = this;
 	self.id = function(){
 		var staff_id_cookie = $cookieStore.get('staff_id');
-		console.log($location.absUrl().search(/login.html$/));
-		if($location.absUrl().search(/login.html$/) != -1){
-			if(staff_id_cookie != 1){
-				window.location.href="/Login.html";
-			}
-		} else {
+		console.log(staff_id_cookie);
+		if($location.absUrl().search(/login.html/) != -1){
 			if(staff_id_cookie == 1){
 				window.location.href="/Home.html";
+			}
+		} else {
+			if(staff_id_cookie != 1){
+				
+				window.location.href="/login.html";
 			}
 		}
 	}
