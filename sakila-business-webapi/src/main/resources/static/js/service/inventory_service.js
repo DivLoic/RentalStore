@@ -18,7 +18,6 @@ App.factory('InventoryService', ['$http', '$q', function($http, $q){
 			);
 		},
 		getInventoriesByFilmId: function(filmId){
-			console.log('Using the Inventory Service: getInventoriesByFilmId.');
 			return $http.get('http://localhost:8080/getInventoryByIdFilm/' + filmId).then(
 					function(res){
 						return res.data;
