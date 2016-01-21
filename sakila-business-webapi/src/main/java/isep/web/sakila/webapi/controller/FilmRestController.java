@@ -86,6 +86,7 @@ public class FilmRestController {
 			System.out.println("Unable to delete. Film with id " + id + "notfound");
 			return new ResponseEntity<FilmWO>(HttpStatus.NOT_FOUND);
 		}
+
 		filmService.deleteFilmById(id);
 		return new ResponseEntity<FilmWO>(HttpStatus.NO_CONTENT);
 	}

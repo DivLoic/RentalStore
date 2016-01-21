@@ -88,33 +88,9 @@ public class FilmServiceImpl implements FilmService {
 		System.out.println(film.getFilmId());
 
 		// save actors
-		for (Integer listIdActor : filmWO.getListIdActor()) {
-			Actor actor = actorRepository.findOne(listIdActor);
-
-			FilmActorPK pk = new FilmActorPK();
-			pk.setActorId(listIdActor);
-			pk.setFilmId(film.getFilmId());
-
-			FilmActor filmActor = new FilmActor();
-			filmActor.setId(pk);
-			filmActor.setLastUpdate(new Timestamp(System.currentTimeMillis()));
-			filmActorRepository.save(filmActor);
-		}
-
+		saveFilmActor(filmWO, film);
 		// save categories
-		for (Integer listIdCategory : filmWO.getListIdCategory()) {
-
-			System.out.println(listIdCategory);
-			FilmCategoryPK pk = new FilmCategoryPK();
-
-			pk.setCategoryId(Byte.valueOf(Integer.toString(listIdCategory)));
-			pk.setFilmId(film.getFilmId());
-
-			FilmCategory filmCategory = new FilmCategory();
-			filmCategory.setId(pk);
-			filmCategory.setLastUpdate(new Timestamp(System.currentTimeMillis()));
-			filmCategoryRepository.save(filmCategory);
-		}
+		saveFilmCategory(filmWO, film);
 
 	}
 
@@ -138,11 +114,74 @@ public class FilmServiceImpl implements FilmService {
 		film.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 		filmRepository.save(film);
 
+		// on supprime d'abbord les FilmActor et FilmCategory
+		deleteFilmActorByIdFilm(film);
+		deleteFilmCategoryByIdFilm(film);
+
+		// save actors
+		saveFilmActor(filmWO, film);
+		// save categories
+		saveFilmCategory(filmWO, film);
+
 	}
 
 	@Override
 	public void deleteFilmById(int id) {
+		Film film = filmRepository.findOne(id);
+		// on supprime d'abbord les FilmActor et FilmCategory
+		deleteFilmActorByIdFilm(film);
+		deleteFilmCategoryByIdFilm(film);
+		// on delete le film
 		filmRepository.delete(id);
+	}
+
+	// ---------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------
+
+	public void saveFilmActor(FilmWO filmWO, Film film) {
+		// save categories
+		for (Integer listIdActor : filmWO.getListIdActor()) {
+			Actor actor = actorRepository.findOne(listIdActor);
+
+			FilmActorPK pk = new FilmActorPK();
+			pk.setActorId(listIdActor);
+			pk.setFilmId(film.getFilmId());
+
+			FilmActor filmActor = new FilmActor();
+			filmActor.setId(pk);
+			filmActor.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+			filmActorRepository.save(filmActor);
+		}
+	}
+
+	public void saveFilmCategory(FilmWO filmWO, Film film) {
+		for (Integer listIdCategory : filmWO.getListIdCategory()) {
+
+			System.out.println(listIdCategory);
+			FilmCategoryPK pk = new FilmCategoryPK();
+
+			pk.setCategoryId(Byte.valueOf(Integer.toString(listIdCategory)));
+			pk.setFilmId(film.getFilmId());
+
+			FilmCategory filmCategory = new FilmCategory();
+			filmCategory.setId(pk);
+			filmCategory.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+			filmCategoryRepository.save(filmCategory);
+		}
+	}
+
+	public void deleteFilmActorByIdFilm(Film film) {
+		List<FilmActor> listFilmActor = filmActorRepository.findAllFilmActorByIdFilm(film);
+		for (FilmActor filmActor : listFilmActor) {
+			filmActorRepository.delete(filmActor);
+		}
+	}
+
+	public void deleteFilmCategoryByIdFilm(Film film) {
+		List<FilmCategory> listFilmCategory = filmCategoryRepository.findAllFilmCategoryByIdFilm(film);
+		for (FilmCategory filmCategory : listFilmCategory) {
+			filmCategoryRepository.delete(filmCategory);
+		}
 	}
 
 }

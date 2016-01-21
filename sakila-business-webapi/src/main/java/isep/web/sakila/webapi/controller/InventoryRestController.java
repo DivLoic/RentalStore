@@ -61,9 +61,6 @@ public class InventoryRestController {
 		List<InventoryWO> inventories = inventoryService.findAllInventoriesByIdFilm(id);
 
 		System.out.println("inventories size : " + inventories.size());
-		// List<Integer> listRentalId = new ArrayList<Integer>();
-		// listRentalId.add(new Integer(1));
-		// listRentalId.add(new Integer(2));
 
 		List<Integer> listInventory = new ArrayList<Integer>();
 
