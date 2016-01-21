@@ -136,10 +136,9 @@
 							<label class="col-md-2 control-lable" for="city"> Select
 								city: </label><br>
 							<div class="col-md-7">
-								<select ng-model="ctrl.customer.city_id" required>
+								<select name="city_id" ng-model="ctrl.customer.city_id" required>
 									<option value="">-- Select city:</option>
-									<option ng-repeat="c in ctrlCity.city"
-										value="{{c.cityId}}">{{c.city}}</option>
+									<option ng-repeat="c in ctrlCity.city" value="{{c.cityId}}">{{c.city}}</option>
 								</select><br>
 								<div class="has-error" ng-show="myForm.$dirty">
 									<span ng-show="myForm.cityId.$error.required">This is a
@@ -148,36 +147,6 @@
 							</div>
 						</div>
 					</div>
-
-
-<!--
-					<div class="generic-container"
-						ng-controller="CityController as ctrlCity">
-
-						 <table class="table table-hover">
-							<thead>
-								<tr>
-									<th>ID.</th>
-									<th>City Name</th>
-									<th>Country Name</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="u in ctrlCity.city">
-									<td><span ng-bind="u.cityId"></span></td>
-									<td><span ng-bind="u.city"></span></td>
-									<td><span ng-bind="u.countryName"></span></td>
-								</tr>
-							</tbody>
-						</table> 
-						
-						<select required>
-							<option value="">-- Select city:</option>
-							<option ng-repeat="c in ctrlCity.city" value="{{c.cityId}}">{{c.city}}</option>
-						</select> 
-					</div>-->
-
-
 
 					<div class="row">
 						<div class="form-group col-md-12">

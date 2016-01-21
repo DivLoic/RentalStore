@@ -27,6 +27,7 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
 	};
 
    self.updateCustomer = function(customer){
+	   console.log("update customer");
         CustomerService.updateCustomer(customer)
         .then(
                 self.fetchAllCustomers, 
@@ -57,6 +58,7 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
         for(var i = 0; i < self.customers.length; i++){
             if(self.customers[i].customerId == customerId) {
             	if (self.customers[i].addressId == addressId){
+            		console.log("city id :"+self.customers[i].city_id)
             		self.customer = angular.copy(self.customers[i]);
                     break;
             	}
