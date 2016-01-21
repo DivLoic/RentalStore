@@ -1,6 +1,6 @@
 'use strict';
 
-App.controller('FilmController', ['$scope' ,'FilmService', function($scope, FilmService) {
+App.controller('FilmController', ['$scope' ,'FilmService', 'InventoryService', function($scope, FilmService, InventoryService) {
 	var self = this;
 	self.film={filmId:null,title:'',description:'', releaseYear:'', rentalDuration:'', rentalRate:'', lenght:'', language:null, features:'', actors:''};
 	self.films=[];
