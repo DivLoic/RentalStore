@@ -28,18 +28,31 @@ App.factory('InventoryService', ['$http', '$q', function($http, $q){
 			);
 		},
 		createInventory: function(inventory){
-			console.log('Using the Inventory Service: creatInventory.');
-			return $http.get('http://localhost:8080/creatInventory/', inventory).then(
+			console.log('Using the Inventory Service: createInventory.');
+			return $http.post('http://localhost:8080/createInventory/', inventory).then(
 					function(res){
-						console.log('Sucess du service, creatInventory ');
+						console.log('Sucess du service, createInventory ');
 						return res.data;
 					},
 					function(err){
-						console.log('Erreur du service, creatInventory ');
+						console.log('Erreur du service, createInventory ');
 						console.log(err);
 						return $q.reject(err);
 					}
 			);
+		},
+		deteleInventoryByFilmId: function(){
+			console.log('Using the Inventory Service: deteleInventoryByFilmId.');
+			return $http.get('http://localhost:8080/deteleInventoryByFilmId/').then(
+				function(res){
+					console.log('Sucess du service, deteleInventoryByFilmId ');
+					return res.data;
+				},
+				function(err){
+					console.log('Erreur du service, deteleInventoryByFilmId ');
+					return $q.reject(err);
+				}
+			)
 		},
 		deleteInventory: function(inventory){
 			console.log('Using the Inventory Service: deleteInventory.');

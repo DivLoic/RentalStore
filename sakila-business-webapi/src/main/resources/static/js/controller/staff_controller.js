@@ -1,6 +1,6 @@
 'use strict';
 
-App.controller('StaffController', ['$scope', 'StaffService', function($scope, StaffService) {
+App.controller('StaffController', ['$scope', '$cookieStore', 'StaffService', function($scope, $cookieStore, StaffService) {
 	var self = this;
     self.auth = false;
 	self.staff={username:'', password:''};
@@ -8,6 +8,9 @@ App.controller('StaffController', ['$scope', 'StaffService', function($scope, St
 	self.submit = function(callBack) {
         StaffService.logStaff(self.staff).then(
     		function(data){
+    			$cookieStore.put('staff_id', data.staffId);
+    			//$cookieStore.put('store_id',data.store_id);
+    			$cookieStore.put('username',data.username);
     			var status = data.username == null ? false : true;
     			callBack(status);
     		});
