@@ -58,7 +58,7 @@ public class CustomerRestController {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@RequestMapping(value = "/updateCustomer/", method = RequestMethod.POST)
 	public ResponseEntity<String> updateCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder) {
-		cutomerService.createCustomer(customerWO);
+		cutomerService.updateCustomer(customerWO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/customer/{id}").buildAndExpand(customerWO.getCustomerId()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
