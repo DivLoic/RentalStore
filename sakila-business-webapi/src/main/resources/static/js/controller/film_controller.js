@@ -1,10 +1,11 @@
 'use strict';
 
-App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', function($scope, FilmService, InventoryService) {
+App.controller('FilmController', ['$scope' ,'FilmService', 'InventoryService', function($scope, FilmService, InventoryService) {
 	var self = this;
-	self.film={filmId:null, title:'',description:'', releaseYear:'', rentalDuration:'', rentalRate:'', lenght:'', language:null, features:''};
+	self.film={filmId:null,title:'',description:'', releaseYear:'', rentalDuration:'', rentalRate:'', lenght:'', language:null, features:'', actors:'', categories:''};
 	self.films=[];
 	
+
 	self.setQuantity = function(){
 		self.films.forEach(function(film){
 			InventoryService.getInventoriesByFilmId(film['filmId']).then(
@@ -33,7 +34,7 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 		FilmService.createFilm(film).then(
 				self.fetchAllFilms, 
 				function(err){
-					console.log("Error: controller failed to greate a film");
+					console.log("Error: controller failed to create a film");
 				}	
 		);
 	};

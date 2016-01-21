@@ -10,6 +10,7 @@ App.controller('ActorController', ['$scope', 'ActorService', function($scope, Ac
 		.then(
 				function(d) {
 					self.actors = d;
+					console.log('Success to retrieve all actors')
 				},
 				function(errResponse){
 					console.error('Error while fetching Currencies');

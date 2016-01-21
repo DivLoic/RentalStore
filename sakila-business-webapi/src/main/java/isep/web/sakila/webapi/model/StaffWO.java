@@ -12,6 +12,7 @@ public class StaffWO extends WebObject {
 	protected String firstName;
 	protected String lastName;
 	protected String email;
+	protected byte storeId;
 
 	public StaffWO() {
 		super();
@@ -30,6 +31,7 @@ public class StaffWO extends WebObject {
 		this.firstName = staff.getFirstName();
 		this.lastName = staff.getLastName();
 		this.email = staff.getEmail();
+		this.storeId = staff.getStore().getStoreId();
 	}
 
 	public String getUsername() {
@@ -83,6 +85,14 @@ public class StaffWO extends WebObject {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public byte getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(byte storeId) {
+		this.storeId = storeId;
 	}
 
 }

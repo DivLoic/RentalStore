@@ -1,14 +1,11 @@
 'use strict';
 
-App.controller('CustomerController', ['$scope', 'CustomerService', 'CityService', function($scope, CustomerService, CityService) {
+App.controller('CustomerController', ['$scope', 'CustomerService', function($scope, CustomerService) {
 	var self = this;
 	
 	self.customer={customerId:null,store_id:'1',firstName:'',lastName:'',email:'',phone:'',
 			addressId:null ,address:'',address2:'',district:'',city_id:'', postalCode:'',active:null};
 	self.customers=[];
-	
-	self.city = {cityId : null, cityName : '', countryId : null};
-	self.cities = [];
 	
 	self.fetchAllCustomers = function(){
 		CustomerService.getCustomer().then(
@@ -22,15 +19,6 @@ App.controller('CustomerController', ['$scope', 'CustomerService', 'CityService'
 		       );
 	};
 	
-	self.fetchAllCities = function() {
-		CityService.fetchAllCities().then(function(d) {
-			self.cities = d;
-			console.log('success to retrieve all cities.');
-		}, function(errResponse) {
-			console.error('Error while fetching Currencies');
-		});
-	};
-	
 	self.createCustomer = function(customer){
 		CustomerService.createCustomer(customer).then(
 				self.fetchAllCustomers, function(errResponse){
@@ -39,6 +27,7 @@ App.controller('CustomerController', ['$scope', 'CustomerService', 'CityService'
 	};
 
    self.updateCustomer = function(customer){
+	   console.log("update customer");
         CustomerService.updateCustomer(customer)
         .then(
                 self.fetchAllCustomers, 
@@ -69,6 +58,7 @@ App.controller('CustomerController', ['$scope', 'CustomerService', 'CityService'
         for(var i = 0; i < self.customers.length; i++){
             if(self.customers[i].customerId == customerId) {
             	if (self.customers[i].addressId == addressId){
+            		console.log("city id :"+self.customers[i].city_id)
             		self.customer = angular.copy(self.customers[i]);
                     break;
             	}
@@ -77,7 +67,6 @@ App.controller('CustomerController', ['$scope', 'CustomerService', 'CityService'
     };
     
     self.fetchAllCustomers();
-    self.fetchAllCities();
 	
 	self.reset = function(){
         self.customer={customerId:null,lastName:'',firstName:'',email:'',phone:'',

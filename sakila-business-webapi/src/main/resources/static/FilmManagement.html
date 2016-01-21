@@ -47,14 +47,16 @@
 					<!-- 			title 			-->
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="file">Film title</label>
+							<label class="col-md-2 control-lable" for="file">Film
+								title</label>
 							<div class="col-md-7">
 								<input type="text" ng-model="ctrl.film.title" name="title"
 									class="form-control input-sm" placeholder="Enter the title"
 									required />
 								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.title.$error.required">This is a required field</span> 
-									<span ng-show="myForm.title.$invalid">This field is invalid </span>
+									<span ng-show="myForm.title.$error.required">This is a
+										required field</span> <span ng-show="myForm.title.$invalid">This
+										field is invalid </span>
 								</div>
 							</div>
 						</div>
@@ -69,7 +71,8 @@
 									class="form-control input-sm" rows="10" cols="50"
 									required="required"> Description </textarea>
 								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.firstName.$error.required">This is a required field</span>
+									<span ng-show="myForm.firstName.$error.required">This is
+										a required field</span>
 								</div>
 							</div>
 						</div>
@@ -78,11 +81,15 @@
 					<!-- 			Release 			-->
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="release">Release year</label>
+							<label class="col-md-2 control-lable" for="release">Release
+								year</label>
 							<div class="col-md-7">
-								<input type="date" ng-model="ctrl.film.release" name="release" class="form-control input-sm" placeholder="Enter the release year" />
+								<input type="date" ng-model="ctrl.film.release" name="release"
+									class="form-control input-sm"
+									placeholder="Enter the release year" />
 								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.firstName.$error.required">This is a required field</span>
+									<span ng-show="myForm.firstName.$error.required">This is
+										a required field</span>
 								</div>
 							</div>
 						</div>
@@ -106,29 +113,34 @@
 
 					<!-- 			Language 			-->
 					<div class="row">
-						<label class="col-md-2 control-lable" for="selectFilmLanguage">Select the language: </label>
-						<div class="col-md-7">
+						<label class="col-md-2 control-lable" for="selectFilmLanguage">Select
+							the language: </label>
+						<div class="col-md-7" ng-controller="LanguageController as ctrl_lang">
 							<select name="selectFilmLanguage" ng-model="ctrl.film.language">
 								<option value="">Select the language :</option>
-								<option ng-repeat="c in ctrl.language" value="{{c.languageId}}">{{c.language}}</option>
+								<option ng-repeat="c in ctrl_lang.languages" value="{{c.languageId}}">{{c.name}}</option>
 							</select>
 						</div>
-					</div></br>
-					
+					</div>
+					</br>
+
 					<div class="has-error" ng-show="myForm.$dirty">
-						<span ng-show="myForm.firstName.$error.required">This is a required field</span>
+						<span ng-show="myForm.firstName.$error.required">This is a
+							required field</span>
 					</div>
 
 					<!-- 			Rental duration 			-->
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="rentalDuration">Rental duration</label>
+							<label class="col-md-2 control-lable" for="rentalDuration">Rental
+								duration</label>
 							<div class="col-md-7">
 								<input type="number" ng-model="ctrl.film.rentalDuration"
 									name="rentalDuration" class="form-control input-sm"
 									placeholder="Enter the rental duration" min="0" max="999" />
 								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.firstName.$error.required">This is a required field</span>
+									<span ng-show="myForm.firstName.$error.required">This is
+										a required field</span>
 								</div>
 							</div>
 						</div>
@@ -137,11 +149,15 @@
 					<!-- 			Rental rate 			-->
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="rentalRate">Rental rate</label>
+							<label class="col-md-2 control-lable" for="rentalRate">Rental
+								rate</label>
 							<div class="col-md-7">
-								<input type="number" ng-model="ctrl.film.rentalRate" name="rentalRate" class="form-control input-sm" placeholder="Enter the rental rate" min="0" max="5" />
+								<input type="number" ng-model="ctrl.film.rentalRate"
+									name="rentalRate" class="form-control input-sm"
+									placeholder="Enter the rental rate" min="0" max="5" />
 								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.firstName.$error.required">This is a required field</span>
+									<span ng-show="myForm.firstName.$error.required">This is
+										a required field</span>
 								</div>
 							</div>
 						</div>
@@ -150,11 +166,15 @@
 					<!-- 			Lenght 			-->
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="lenght">Film lenght</label>
+							<label class="col-md-2 control-lable" for="lenght">Film
+								length</label>
 							<div class="col-md-7">
-								<input type="number" ng-model="ctrl.film.lenght" name="lenght" class="form-control input-sm" placeholder="Enter the film lenght" min="0" />
+								<input type="number" ng-model="ctrl.film.lenght" name="lenght"
+									class="form-control input-sm"
+									placeholder="Enter the film length" min="0" />
 								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.firstName.$error.required">This is a required field</span>
+									<span ng-show="myForm.firstName.$error.required">This is
+										a required field</span>
 								</div>
 							</div>
 						</div>
@@ -162,7 +182,8 @@
 
 					<!-- 			rating 			-->
 					<div class="row">
-						<label class="col-md-2 control-lable" for="selectRate">Select the rate</label>
+						<label class="col-md-2 control-lable" for="selectRate">Select
+							the rate</label>
 						<div class="col-md-7">
 							<select name="selectRate" ng-model="ctrl.film.rate">
 								<option value="">Select the rate</option>
@@ -173,15 +194,18 @@
 								<option value="NC-17">NC-17</option>
 							</select>
 						</div>
-					</div></br>
-					
+					</div>
+					</br>
+
 					<div class="has-error" ng-show="myForm.$dirty">
-						<span ng-show="myForm.firstName.$error.required">This is a required field</span>
+						<span ng-show="myForm.firstName.$error.required">This is a
+							required field</span>
 					</div>
 
 					<!-- 			Special features 			-->
 					<div class="row">
-						<label class="col-md-2 control-lable" for="selectFeatures">Select the special features</label>
+						<label class="col-md-2 control-lable" for="selectFeatures">Select
+							the special features</label>
 						<div class="col-md-7">
 							<label class="checkbox-inline"> <input type="checkbox"
 								name="trailers" value="features" />Trailers
@@ -192,14 +216,42 @@
 							</label> <label class="checkbox-inline"> <input type="checkbox"
 								name="behindScenes" value="features" />Behind the Scenes
 							</label>
-							<!-- ng-model="ctrl.film.features" -->
 						</div>
 					</div>
 					</br>
 
 
 					<div class="has-error" ng-show="myForm.$dirty">
-						<span ng-show="myForm.firstName.$error.required">This is a required field</span>
+						<span ng-show="myForm.firstName.$error.required">This is a
+							required field</span>
+					</div>
+
+					<!-- 			List of actors 		-->
+					<div class="row" ng-controller="ActorController as actorCtrl">
+						<label class="col-md-2 control-lable" for="file">Select
+							the actors</label>
+						<div class="col-md-7">
+
+							<label ng-repeat="a in actorCtrl.actors"> <input
+								type="checkbox" checklist-model="a.actors"
+								checklist-value="{{a.actorId}}"> {{a.lastName}} {{a.firstName}}
+							</label>
+
+						</div>
+					</div>
+					
+					<!-- 			List of category 		-->
+					<div class="row" ng-controller="CategoryController as catCtrl">
+						<label class="col-md-2 control-lable" for="file">Select
+							the category(ies)</label>
+						<div class="col-md-7">
+
+							<label ng-repeat="cat in catCtrl.categories"> <input
+								type="checkbox" checklist-model="cat.categories"
+								checklist-value="{{cat.categoryId}}"> {{cat.name}}
+							</label>
+
+						</div>
 					</div>
 
 					<!-- 			Button 			-->
@@ -210,7 +262,8 @@
 								value="{{!ctrl.film.filmId ? 'Add' : 'Update'}}"
 								class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
 							<button type="button" ng-click="ctrl.reset()"
-								class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+								class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset
+								Form</button>
 						</div>
 					</div>
 
@@ -233,8 +286,8 @@
 							<th>Release year</th>
 							<th>Rental duration</th>
 							<th>Rental rate</th>
-							<th>Film lenght</th>
-							<th>language</th>
+							<th>Film length</th>
+							<th>Language</th>
 							<th>Special features</th>
 							<th width="20%"></th>
 						</tr>
@@ -266,8 +319,16 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 	<script src="js/app.js"></script>
-	<script src="js/service/film_service.js""></script>
+	<script src="js/service/actor_service.js"></script>
+	<script src="js/controller/actor_controller.js"></script>
+	<script src="js/service/film_service.js"></script>
 	<script src="js/controller/film_controller.js"></script>
+	<script src="js/service/inventory_service.js"></script>
+	<script src="js/controller/inventory_controller.js"></script>
+	<script src="js/service/language_service.js"></script>
+	<script src="js/controller/language_controller.js"></script>
+	<script src="js/service/category_service.js"></script>
+	<script src="js/controller/category_controller.js"></script>
 </body>
 </html>
 

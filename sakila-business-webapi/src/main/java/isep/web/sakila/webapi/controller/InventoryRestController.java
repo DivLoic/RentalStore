@@ -60,22 +60,22 @@ public class InventoryRestController {
 
 		List<InventoryWO> inventories = inventoryService.findAllInventoriesByIdFilm(id);
 
-		System.out.println("inventories size : " + inventories.size());
-
 		List<Integer> listInventory = new ArrayList<Integer>();
 
-		for (InventoryWO inv : inventories) {
-			listInventory.add(inv.getInventoryId());
-		}
+		if (inventories.size() > 0) {
+			for (InventoryWO inv : inventories) {
+				listInventory.add(inv.getInventoryId());
+			}
 
-		List<RentalWO> toto = rentalService.findByIdInventory(listInventory);
+			List<RentalWO> toto = rentalService.findByIdInventory(listInventory);
 
-		if (toto.isEmpty()) {
-
-			System.out.println("vide");
-			return new ResponseEntity<Integer>(inventories.size(), HttpStatus.CREATED);
+			if (toto.isEmpty()) {
+				return new ResponseEntity<Integer>(inventories.size(), HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<Integer>(inventories.size() - toto.size(), HttpStatus.CREATED);
+			}
 		} else {
-			return new ResponseEntity<Integer>(inventories.size() - toto.size(), HttpStatus.CREATED);
+			return new ResponseEntity<Integer>(new Integer(-1), HttpStatus.CREATED);
 		}
 
 	}

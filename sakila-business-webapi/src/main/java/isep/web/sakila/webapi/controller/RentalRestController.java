@@ -60,7 +60,11 @@ public class RentalRestController {
 	public ResponseEntity<Void> createRental(@RequestBody RentalWO rentalWO, UriComponentsBuilder ucBuilder)
 			throws ParseException {
 		System.out.println("Creating Rental " + rentalWO.getRentalId());
-
+		if (rentalWO.getReturnDate() != null) {
+			System.out.println("rental non nul");
+		} else {
+			System.out.println("rental nul");
+		}
 		rentalService.saveRental(rentalWO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/rental/{id}").buildAndExpand(rentalWO.getRentalId()).toUri());

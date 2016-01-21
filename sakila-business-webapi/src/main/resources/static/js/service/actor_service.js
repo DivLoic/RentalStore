@@ -9,6 +9,7 @@ App.factory('ActorService', ['$http', '$q', function($http, $q){
 			.then(
 					function(response){
 						return response.data;
+						console.log("Success du service: getActors.");
 					}, 
 					function(errResponse){
 						console.error('Error while fetching actors');
