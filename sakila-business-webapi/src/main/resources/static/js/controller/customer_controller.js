@@ -3,8 +3,8 @@
 App.controller('CustomerController', ['$scope', 'CustomerService', 'CityService', function($scope, CustomerService, CityService) {
 	var self = this;
 	
-	self.customer={customerId:null,firstName:'',lastName:'',email:'',phone:'',
-			address:'',address2:'',district:'',cityId:'',postalCode:'',active:null};
+	self.customer={customerId:null,store_id:'1',firstName:'',lastName:'',email:'',phone:'',
+			addressId:null ,address:'',address2:'',district:'',city_id:'', postalCode:'',active:null};
 	self.customers=[];
 	
 	self.city = {cityId : null, cityName : '', countryId : null};
@@ -50,7 +50,10 @@ App.controller('CustomerController', ['$scope', 'CustomerService', 'CityService'
     
     self.submit = function() {
         if(self.customer.customerId==null){
-            console.log('Saving New Customer', self.customer);    
+            console.log('Saving New Customer', self.customer); 
+            /*var newCustomer = {customerId:"600",store_id:"1",firstName:"aze",lastName:"AZE",email:"a@a.com",phone:"0123456789",
+        			addressId:"1" ,address:"rue lafayette",address2:"rue lafayette2",district:"Paris",city_id:"1", postalCode:"75001",active:"1"};
+            self.createCustomer(newCustomer);*/
             self.createCustomer(self.customer);
         }else{
             console.log('Customer updating with id ', self.customer.customerId);
@@ -60,12 +63,15 @@ App.controller('CustomerController', ['$scope', 'CustomerService', 'CityService'
         self.reset();
     };
     
-    self.edit = function(customerId){
-        console.log('id to be edited', customerId);
+    self.edit = function(customerId,addressId){
+        console.log('customer id to be edited', customerId);
+        console.log('address id to be edited', addressId);
         for(var i = 0; i < self.customers.length; i++){
             if(self.customers[i].customerId == customerId) {
-               self.customer = angular.copy(self.customers[i]);
-               break;
+            	if (self.customers[i].addressId == addressId){
+            		self.customer = angular.copy(self.customers[i]);
+                    break;
+            	}
             }
         }
     };
@@ -74,7 +80,8 @@ App.controller('CustomerController', ['$scope', 'CustomerService', 'CityService'
     self.fetchAllCities();
 	
 	self.reset = function(){
-        self.actor={actorId:null,lastName:'',firstName:''};
+        self.customer={customerId:null,lastName:'',firstName:'',email:'',phone:'',
+    			addressId:null ,address:'',address2:'',district:'',cityId:'',postalCode:'',active:null};
         $scope.myForm.$setPristine(); //reset Form
     };
     

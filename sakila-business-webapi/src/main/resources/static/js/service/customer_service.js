@@ -29,7 +29,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 		},
 		updateCustomer: function(customer){
 			return $http.post('http://localhost:8080/updateCustomer/', customer).then(
-					function(reponse){
+					function(response){
 						console.log(response.data);
 						return response.data;
 					}, function(err){
