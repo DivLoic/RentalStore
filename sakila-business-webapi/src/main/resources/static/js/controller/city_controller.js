@@ -2,7 +2,7 @@
 
 App.controller('CityController', ['$scope', 'CityService', function($scope, CityService) {
 			var self = this;
-			self.city = {cityId : null, cityName : '', countryId : null};
+			self.city = {cityId : null, city : '', countryId : null};
 			self.cities = [];
 
 			self.fetchAllCities = function() {
