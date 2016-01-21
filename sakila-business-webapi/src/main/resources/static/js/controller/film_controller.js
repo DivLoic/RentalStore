@@ -23,7 +23,6 @@ App.controller('FilmController', ['$scope' ,'FilmService', 'InventoryService', f
 		FilmService.fetchAllFilms().then(
 				function(res) {
 					self.films = res;
-					self.setQuantity();
 				},
 				function(err){
 					console.log("Error: controller failed to get the films");
@@ -96,7 +95,12 @@ App.controller('FilmController', ['$scope' ,'FilmService', 'InventoryService', f
 
 
 	self.reset = function(){
-		self.film={filmId:null,title:'',description:'', releaseYear:'', rentalDuration:'', rentalRate:'', lenght:'', language:null, features:''};
+		self.film = {
+				filmId:null, title:'',
+				description:'', releaseYear:'',
+				rentalDuration:'', rentalRate:'',
+				lenght:'', language:null, features:''
+		};
 		$scope.myForm.$setPristine(); //reset Form
 	};
 
