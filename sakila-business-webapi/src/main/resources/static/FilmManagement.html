@@ -115,10 +115,10 @@
 					<div class="row">
 						<label class="col-md-2 control-lable" for="selectFilmLanguage">Select
 							the language: </label>
-						<div class="col-md-7">
+						<div class="col-md-7" ng-controller="LanguageController as ctrl_lang">
 							<select name="selectFilmLanguage" ng-model="ctrl.film.language">
 								<option value="">Select the language :</option>
-								<option ng-repeat="c in ctrl.language" value="{{c.languageId}}">{{c.language}}</option>
+								<option ng-repeat="c in ctrl_lang.languages" value="{{c.languageId}}">{{c.name}}</option>
 							</select>
 						</div>
 					</div>
@@ -216,7 +216,6 @@
 							</label> <label class="checkbox-inline"> <input type="checkbox"
 								name="behindScenes" value="features" />Behind the Scenes
 							</label>
-							<!-- ng-model="ctrl.film.features" -->
 						</div>
 					</div>
 					</br>
@@ -233,15 +232,6 @@
 							the actors</label>
 						<div class="col-md-7">
 
-							<!-- 
-							<label class="checkbox-inline"> <input type="checkbox"
-								ng-model="ctrl.film.actors" name="actors"
-								ng-repeat="a in actorCtrl.actor" value="a.actorId" />{{a.lastName}}
-								{{a.firstName}}
-								</label> 
-								-->
-
-
 							<label ng-repeat="a in actorCtrl.actors"> <input
 								type="checkbox" checklist-model="a.actors"
 								checklist-value="{{a.actorId}}"> {{a.lastName}} {{a.firstName}}
@@ -249,19 +239,20 @@
 
 						</div>
 					</div>
+					
+					<!-- 			List of category 		-->
+					<div class="row" ng-controller="CategoryController as catCtrl">
+						<label class="col-md-2 control-lable" for="file">Select
+							the category(ies)</label>
+						<div class="col-md-7">
 
-					<!--  <div class="row" ng-controller="CustomerController as ctrl_customer">
-                          <div class="form-group col-md-12">
-                          	<label class="col-md-2 control-lable" for="customer">Customer:</label>
-                          	<div class="col-md-7">
-                              <select ng-model="ctrl.rental.customerId">
-                              	<option value="">First Name & Last Name of the customer</option>
-                              	<option ng-repeat="user in ctrl_customer.customers" value="{{user.customerId}}">{{user.firstName}} {{user.lastName}}</option>
-                              </select>
-                             </div>
-                          </div>
-                      </div> 
-                      -->
+							<label ng-repeat="cat in catCtrl.categories"> <input
+								type="checkbox" checklist-model="cat.categories"
+								checklist-value="{{cat.categoryId}}"> {{cat.name}}
+							</label>
+
+						</div>
+					</div>
 
 					<!-- 			Button 			-->
 
@@ -334,6 +325,10 @@
 	<script src="js/controller/film_controller.js"></script>
 	<script src="js/service/inventory_service.js"></script>
 	<script src="js/controller/inventory_controller.js"></script>
+	<script src="js/service/language_service.js"></script>
+	<script src="js/controller/language_controller.js"></script>
+	<script src="js/service/category_service.js"></script>
+	<script src="js/controller/category_controller.js"></script>
 </body>
 </html>
 
