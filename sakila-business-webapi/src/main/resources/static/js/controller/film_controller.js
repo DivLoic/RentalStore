@@ -5,10 +5,24 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 	self.film={filmId:null,title:'',description:'', releaseYear:'', rentalDuration:'', rentalRate:'', lenght:'', language:null, features:''};
 	self.films=[];
 	
+	self.setQuantity = function(){
+		self.films.forEach(function(film){
+			InventoryService.getInventoriesByFilmId(film['filmId']).then(
+					function(count){
+						film['quantity'] = count;
+					},
+					function(err){
+						//
+					}
+			)
+		});
+	};
+	
 	self.fetchAllFilms = function(){
 		FilmService.fetchAllFilms().then(
 				function(res) {
 					self.films = res;
+					self.setQuantity();
 				},
 				function(err){
 					console.log("Error: controller failed to get the films");
@@ -45,26 +59,6 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 
 	self.fetchAllFilms();
 	
-	self.addAvaibility = function(allFilms, allInventories){
-		allFilms.forEach(function(film){
-			var filtered = allInventories.filter(function(allInventory){
-				allInventory['filmId'] == film['filmId']
-			});
-			film['quantity'] = filtered.length;
-		});
-		return allFilms;
-	};
-	
-
-	self.setQuantity = function(){
-		self.films.forEach(function(film){
-			InventoryService.getInventoriesByFilmId(film['filmId']).then(
-				function(res){
-						film['quantity'] = res.length;
-				}
-			)
-		})
-	};
 	
 	self.submit = function() {
 		if(self.film.filmId == null){
@@ -73,7 +67,7 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 		}else{
 			console.log('Film updating with id ', self.film.filmId);
 			console.log('Film: ', self.film);
-			self.updateFilmself.film);
+			self.updateFilm(self.film);
 		}
 		self.reset();
 	};

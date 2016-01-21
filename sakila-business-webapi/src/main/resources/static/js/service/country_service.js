@@ -3,20 +3,20 @@
  */
 App.factory('CountryService', ['$http', '$q', function($http, $q){
 	return {
-		getContry : function(){
-			$http.get('http:/localhost:8080/getCountries/').then(
+		getCountries : function(){
+			return $http.get('http://localhost:8080/getCountries/').then(
 					function(res){
-						console.log('Success du service contry: getContry');
+						console.log('Success du service contry: getCountries');
 						return res.data;
 					},
 					function(err){
-						console.log('Erreur du service contry: getContry');
+						console.log('Erreur du service contry: getCountries');
 						$q.reject(err);
 					}
-			)
+			);
 		},
-		addCountry : function(contry){
-			$http.post('http:/localhost:8080/createCountry/', country).then(
+		addCountry : function(country){
+			return $http.post('http://localhost:8080/createCountry/', country).then(
 					function(res){
 						console.log('Success du service contry: addCountry');
 						return res.data;
@@ -25,10 +25,22 @@ App.factory('CountryService', ['$http', '$q', function($http, $q){
 						console.log('Erreur du service contry: addCountry');
 						$q.reject(err);
 					}		
-			)
+			);
 		},
-		deleteCountry: function(country){
-			$http.post('http:/localhost:8080/deleteCountry/', country).then(
+		updateCountry : function(country){
+			return $http.post('http://localhost:8080/updateCountry/', country).then(
+					function(res){
+						console.log('Success du service contry: updateCountry');
+						return res.data;
+					},
+					function(err){
+						console.log('Erreur du service contry: updateCountry');
+						$q.reject(err);
+					}		
+			);
+		},
+		deleteCountry: function(countryId){
+			return $http.get('http://localhost:8080/deleteCountry/' +countryId).then(
 					function(res){
 						console.log('Success du service contry: deleteCountry');
 						return res.data;
@@ -38,7 +50,7 @@ App.factory('CountryService', ['$http', '$q', function($http, $q){
 						$q.reject(err);
 					}
 					
-			)		
+			);		
 		}
 	}}
 ]);
