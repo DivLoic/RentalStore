@@ -41,7 +41,9 @@
 
 				<form ng-submit="ctrl.submit()" name="myForm"
 					class="form-horizontal">
-
+					<fieldset style = "padding:0 20px 20px 20px; margin-bottom:10px; border:1px solid ">
+ 					<legend style = "text-align: center"> The movie</legend>
+					
 					<!-- <input type="hidden" ng-model="ctrl.film.filmId" /> -->
 
 					<!-- 			title 			-->
@@ -201,8 +203,10 @@
 						<span ng-show="myForm.firstName.$error.required">This is a
 							required field</span>
 					</div>
-
+</fieldset>
 					<!-- 			Special features 			-->
+					<fieldset style = "padding:0 20px 20px 20px; margin-bottom:10px; border:1px solid ">
+ 					<legend style = "text-align: center"> Special features </legend>
 					<div class="row">
 						<label class="col-md-2 control-lable" for="selectFeatures">Select
 							the special features</label>
@@ -218,7 +222,7 @@
 							</label>
 						</div>
 					</div>
-					</br>
+					</fieldset>
 
 
 					<div class="has-error" ng-show="myForm.$dirty">
@@ -227,32 +231,42 @@
 					</div>
 
 					<!-- 			List of actors 		-->
+					<fieldset style = "padding:0 20px 20px 20px; margin-bottom:10px; border:1px solid ">
+ 					<legend style = "text-align: center"> List of actors </legend>
 					<div class="row" ng-controller="ActorController as actorCtrl">
-						<label class="col-md-2 control-lable" for="file">Select
-							the actors</label>
-						<div class="col-md-7">
-
-							<label ng-repeat="a in actorCtrl.actors"> <input
-								type="checkbox" checklist-model="a.actors"
-								checklist-value="{{a.actorId}}"> {{a.lastName}} {{a.firstName}}
+					<label class="col-md-2 control-lable" for="file">Select the actor(s)</label>
+						<div class="col-md-10">
+							<label ng-repeat="a in actorCtrl.actors">
+								<table style="width: 200px;">
+  						 				<tr style="height: 20px;">
+       									<td style="text-align:left; vertical-align: left; font-size: 12;">
+											<input type="checkbox" checklist-model="a.actors" checklist-value="{{a.actorId}}"> {{a.lastName}} {{a.firstName}}
+										</td>
+									</tr>
+								</table>	
 							</label>
-
 						</div>
 					</div>
+					</fieldset>
 					
 					<!-- 			List of category 		-->
+					<fieldset style = "padding:0 20px 20px 20px; margin-bottom:10px; border:1px solid ">
+ 					<legend style = "text-align: center"> List of category </legend>
 					<div class="row" ng-controller="CategoryController as catCtrl">
-						<label class="col-md-2 control-lable" for="file">Select
-							the category(ies)</label>
-						<div class="col-md-7">
-
-							<label ng-repeat="cat in catCtrl.categories"> <input
-								type="checkbox" checklist-model="cat.categories"
-								checklist-value="{{cat.categoryId}}"> {{cat.name}}
+						<label class="col-md-2 control-lable" for="file">Select the category(ies)</label>
+						<div class="col-md-10">
+							<label ng-repeat="cat in catCtrl.categories"> 
+							<table style="width: 100px;">
+  						 		<tr style="height: 15px;">
+       								<td style="text-align:left; vertical-align: left; font-size: 12;"> 
+       									<input type="checkbox" checklist-model="cat.categories" checklist-value="{{cat.categoryId}}"> {{cat.name}}
+									</td>
+								</tr>
+							</table>
 							</label>
-
 						</div>
 					</div>
+					</fieldset>
 
 					<!-- 			Button 			-->
 
