@@ -6,11 +6,24 @@ App.controller('FilmController', ['$scope' ,'FilmService', function($scope, Film
 	self.films=[];
 	
 
+	self.setQuantity = function(){
+		self.films.forEach(function(film){
+			InventoryService.getInventoriesByFilmId(film['filmId']).then(
+					function(count){
+						film['quantity'] = count;
+					},
+					function(err){
+						//
+					}
+			)
+		});
+	};
 	
 	self.fetchAllFilms = function(){
 		FilmService.fetchAllFilms().then(
 				function(res) {
 					self.films = res;
+					self.setQuantity();
 				},
 				function(err){
 					console.log("Error: controller failed to get the films");
@@ -47,26 +60,6 @@ App.controller('FilmController', ['$scope' ,'FilmService', function($scope, Film
 
 	self.fetchAllFilms();
 	
-	self.addAvaibility = function(allFilms, allInventories){
-		allFilms.forEach(function(film){
-			var filtered = allInventories.filter(function(allInventory){
-				allInventory['filmId'] == film['filmId']
-			});
-			film['quantity'] = filtered.length;
-		});
-		return allFilms;
-	};
-	
-
-	self.setQuantity = function(){
-		self.films.forEach(function(film){
-			InventoryService.getInventoriesByFilmId(film['filmId']).then(
-				function(res){
-						film['quantity'] = res.length;
-				}
-			)
-		})
-	};
 	
 	self.submit = function() {
 		if(self.film.filmId == null){
