@@ -8,6 +8,7 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 			self.fetchAllCities = function() {
 				CityService.fetchAllCities().then(function(d) {
 					self.city = d;
+					//console.log(d);
 				}, function(errResponse) {
 					console.error('Error while fetching Currencies');
 				});

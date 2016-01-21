@@ -1,9 +1,11 @@
 'use strict';
 
-App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', function($scope, FilmService, InventoryService) {
+App.controller('FilmController', ['$scope' ,'FilmService', function($scope, FilmService) {
 	var self = this;
-	self.film={filmId:null,title:'',description:'', releaseYear:'', rentalDuration:'', rentalRate:'', lenght:'', language:null, features:''};
+	self.film={filmId:null,title:'',description:'', releaseYear:'', rentalDuration:'', rentalRate:'', lenght:'', language:null, features:'', actors:''};
 	self.films=[];
+	
+
 	
 	self.fetchAllFilms = function(){
 		FilmService.fetchAllFilms().then(
@@ -20,7 +22,7 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 		FilmService.createFilm(film).then(
 				self.fetchAllFilms, 
 				function(err){
-					console.log("Error: controller failed to greate a film");
+					console.log("Error: controller failed to create a film");
 				}	
 		);
 	};
@@ -73,7 +75,7 @@ App.controller('FilmController', ['$scope', 'FilmService', 'InventoryService', f
 		}else{
 			console.log('Film updating with id ', self.film.filmId);
 			console.log('Film: ', self.film);
-			self.updateFilmself.film);
+			self.updateFilm(self.film);
 		}
 		self.reset();
 	};

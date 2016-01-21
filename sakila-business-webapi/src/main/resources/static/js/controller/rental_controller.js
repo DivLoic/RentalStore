@@ -1,14 +1,12 @@
 'use strict';
 
-App.controller('RentalController', ['$scope', 'RentalService', 'FilmService', 'CustomerService', function($scope, RentalService, FilmService, CustomerService) {
+App.controller('RentalController', ['$scope', 'RentalService', 'FilmService',  function($scope, RentalService, FilmService) {
 	var self = this;
 	self.currentRentalName = ''
     self.rental={rentalId:null, rentalDate:'',customerId:'',returnDate:'',staffId:'1', inventoryId:''};
     self.rentals=[];
     
-    self.customer={customerId:null,firstName:'',lastName:'',email:'',phone:'',
-			address:'',address2:'',district:'',cityId:'',postalCode:'',active:null};
-	self.customers=[];
+
 	
 	self.loadRental = function(filmId, filmName){
 		self.rental['inventoryId'] = filmId;
