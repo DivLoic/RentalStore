@@ -58,8 +58,8 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
         for(var i = 0; i < self.customers.length; i++){
             if(self.customers[i].customerId == customerId) {
             	if (self.customers[i].addressId == addressId){
-            		console.log("city id :"+self.customers[i].city_id)
             		self.customer = angular.copy(self.customers[i]);
+            		console.log(self.customer);
                     break;
             	}
             }
@@ -69,8 +69,8 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
     self.fetchAllCustomers();
 	
 	self.reset = function(){
-        self.customer={customerId:null,lastName:'',firstName:'',email:'',phone:'',
-    			addressId:null ,address:'',address2:'',district:'',cityId:'',postalCode:'',active:null};
+		self.customer={customerId:null,store_id:'1',firstName:'',lastName:'',email:'',phone:'',
+				addressId:null ,address:'',address2:'',district:'',city_id:'', postalCode:'',active:null};
         $scope.myForm.$setPristine(); //reset Form
     };
     

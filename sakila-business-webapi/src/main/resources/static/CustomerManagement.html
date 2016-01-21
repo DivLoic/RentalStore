@@ -133,10 +133,9 @@
 
 					<div class="row " ng-controller="CityController as ctrlCity">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="city"> Select
-								city: </label><br>
+							<label class="col-md-2 control-lable" for="file"> Select city: </label><br>
 							<div class="col-md-7">
-								<select name="city_id" ng-model="ctrl.customer.city_id" required>
+								<select name="city_id" id="city_id" ng-model="ctrl.customer.city_id" required>
 									<option value="">-- Select city:</option>
 									<option ng-repeat="c in ctrlCity.city" value="{{c.cityId}}">{{c.city}}</option>
 								</select><br>
@@ -252,6 +251,8 @@
 
 
 
+	<script src="js/libraries/jquery-2.2.0.min.js"></script>
+
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
@@ -266,6 +267,11 @@
 	<script src="js/controller/rental_controller.js"></script>
 	<script src="js/controller/customer_controller.js"></script>
 	<script src="js/controller/inventory_controller.js"></script>
+
+
+	<script>
+		$("#city_id").val(3);
+	</script>
 </body>
 </html>
 
