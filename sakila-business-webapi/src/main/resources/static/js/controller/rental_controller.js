@@ -1,9 +1,10 @@
 'use strict';
 
-App.controller('RentalController', ['$scope', 'RentalService', 'FilmService',  function($scope, RentalService, FilmService) {
+App.controller('RentalController', ['$scope', '$cookieStore', 'RentalService', 'FilmService',
+                                    function($scope, $cookieStore, RentalService, FilmService) {
 	var self = this;
 	self.currentRentalName = ''
-    self.rental={rentalId:null, rentalDate:'',customerId:'',returnDate:'',staffId:'1', inventoryId:''};
+    self.rental={rentalId:null, rentalDate:'',customerId:'',returnDate:'',staffId:'', inventoryId:''};
     self.customer={customerId:null,firstName:'',lastName:'',email:'',phone:'',
 			address:'',address2:'',district:'',cityId:'',postalCode:'',active:null};
     self.rentals=[];
@@ -11,7 +12,9 @@ App.controller('RentalController', ['$scope', 'RentalService', 'FilmService',  f
 	
 	self.loadRental = function(filmId, filmName){
 		self.rental['inventoryId'] = filmId;
+		self.rental['staffId'] = $cookieStore.get('staff_id');
 		self.currentRentalName = filmName;
+		
 	}
 	
 	self.saveRental = function(rental){
@@ -37,6 +40,7 @@ App.controller('RentalController', ['$scope', 'RentalService', 'FilmService',  f
 			} else {
 				rent.returnDate = null;
 			}
+			rent['staffId'] =  $cookieStore.get('staff_id');
 			self.saveRental(rent);	
 		}
 	};

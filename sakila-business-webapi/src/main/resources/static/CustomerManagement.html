@@ -136,7 +136,7 @@
 						<div class="form-group col-md-12">
 							<label class="col-md-2 control-lable" for="file"> Select city: </label><br>
 							<div class="col-md-7">
-								<select name="city_id" id="city_id" ng-model="ctrl.customer.city_id" required>
+								<select name="city_id" ng-change="ctrl.customer.city_id" id="city_id" ng-model="ctrl.customer.city_id" required>
 									<option value="">-- Select city:</option>
 									<option ng-repeat="c in ctrlCity.city" value="{{c.cityId}}">{{c.city}}</option>
 								</select><br>
@@ -219,42 +219,7 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<script src="js/libraries/jquery-2.2.0.min.js"></script>
-
-
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 	 <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>

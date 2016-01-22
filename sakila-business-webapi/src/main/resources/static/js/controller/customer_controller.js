@@ -1,6 +1,7 @@
 'use strict';
 
-App.controller('CustomerController', ['$scope', 'CustomerService', function($scope, CustomerService) {
+App.controller('CustomerController', ['$scope', '$cookieStore', 'CustomerService', 
+                                      function($scope, $cookieStore, CustomerService) {
 	var self = this;
 	
 	self.customer={customerId:null,store_id:'1',firstName:'',lastName:'',email:'',phone:'',
@@ -40,9 +41,7 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
     self.submit = function() {
         if(self.customer.customerId==null){
             console.log('Saving New Customer', self.customer); 
-            /*var newCustomer = {customerId:"600",store_id:"1",firstName:"aze",lastName:"AZE",email:"a@a.com",phone:"0123456789",
-        			addressId:"1" ,address:"rue lafayette",address2:"rue lafayette2",district:"Paris",city_id:"1", postalCode:"75001",active:"1"};
-            self.createCustomer(newCustomer);*/
+            self.customer['store_id'] = $cookieStore.get('store_id');
             self.createCustomer(self.customer);
         }else{
             console.log('Customer updating with id ', self.customer.customerId);
