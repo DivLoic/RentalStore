@@ -55,6 +55,15 @@ public class InventoryRestController {
 		return new ResponseEntity<List<InventoryWO>>(inventories, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/getInventoriesByIdStore/{idStore}", method = RequestMethod.GET)
+	public ResponseEntity<List<InventoryWO>> listAllInventory(@PathVariable("idStore") byte idStore) {
+		List<InventoryWO> inventories = inventoryService.findAllInventoriesByIdStore(idStore);
+		if (inventories.isEmpty()) {
+			return new ResponseEntity<List<InventoryWO>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<InventoryWO>>(inventories, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/getInventoryByIdFilm/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Integer> getInventoryByIdFilm(@PathVariable("id") int id) {
 
@@ -93,6 +102,23 @@ public class InventoryRestController {
 
 	@RequestMapping(value = "/deleteInventory/{id}", method = RequestMethod.GET)
 	public ResponseEntity<InventoryWO> deleteInventory(@PathVariable("id") int id) {
+
+		System.out.println("Fetching & Deleting Inventory with id " + id);
+
+		InventoryWO inventory = inventoryService.findById(id);
+
+		if (inventory == null) {
+			System.out.println("Unable to delete. Inventory with id " + id + " not found");
+			return new ResponseEntity<InventoryWO>(HttpStatus.NOT_FOUND);
+		}
+		System.out.println("before deleting");
+		inventoryService.deleteInventoryById(id);
+		System.out.println("after deleting");
+		return new ResponseEntity<InventoryWO>(HttpStatus.NO_CONTENT);
+	}
+
+	@RequestMapping(value = "/deleteInventoryByIdFilm/{id}", method = RequestMethod.GET)
+	public ResponseEntity<InventoryWO> deleteInventoryByIdFilm(@PathVariable("id") int id) {
 
 		System.out.println("Fetching & Deleting Inventory with id " + id);
 

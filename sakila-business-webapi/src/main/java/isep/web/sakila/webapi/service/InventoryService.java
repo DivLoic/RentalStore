@@ -8,6 +8,8 @@ public interface InventoryService {
 
 	List<InventoryWO> findAllInventories();
 
+	List<InventoryWO> findAllInventoriesByIdStore(byte idStore);
+
 	List<InventoryWO> findAllInventoriesByIdFilm(int id_film);
 
 	InventoryWO findById(int id);

@@ -42,6 +42,20 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
+	public List<InventoryWO> findAllInventoriesByIdStore(byte idStore) {
+		List<InventoryWO> inventories = new LinkedList<InventoryWO>();
+
+		Store store = storeRepository.findOne(idStore);
+		for (Inventory inventory : inventoryRepository.findAllInventoriesByIdStore(store)) {
+			inventories.add(new InventoryWO(inventory));
+		}
+
+		return inventories;
+	}
+
+	;
+
+	@Override
 	public List<InventoryWO> findAllInventoriesByIdFilm(int id_film) {
 		List<InventoryWO> inventories = new LinkedList<InventoryWO>();
 
