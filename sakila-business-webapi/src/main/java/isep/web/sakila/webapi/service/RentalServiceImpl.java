@@ -14,13 +14,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import isep.web.sakila.dao.repositories.CustomerRepository;
+import isep.web.sakila.dao.repositories.FilmRepository;
 import isep.web.sakila.dao.repositories.InventoryRepository;
 import isep.web.sakila.dao.repositories.RentalRepository;
 import isep.web.sakila.dao.repositories.StaffRepository;
 import isep.web.sakila.jpa.entities.Customer;
+import isep.web.sakila.jpa.entities.Film;
 import isep.web.sakila.jpa.entities.Inventory;
 import isep.web.sakila.jpa.entities.Rental;
 import isep.web.sakila.jpa.entities.Staff;
+import isep.web.sakila.webapi.model.RentalAndFilmWO;
 import isep.web.sakila.webapi.model.RentalWO;
 
 @Service("rentalService")
@@ -31,7 +34,9 @@ public class RentalServiceImpl implements RentalService {
 	@Autowired
 	private InventoryRepository inventoryRepository;
 	@Autowired
-	private CustomerRepository customerEepository;
+	private CustomerRepository customerRepository;
+	@Autowired
+	private FilmRepository filmRepository;
 	@Autowired
 	private StaffRepository staffRepository;
 
@@ -82,10 +87,33 @@ public class RentalServiceImpl implements RentalService {
 	}
 
 	@Override
+	public List<RentalAndFilmWO> findByIdCustomer(int id) {
+		List<RentalAndFilmWO> rentals = new LinkedList<RentalAndFilmWO>();
+
+		Customer customer = customerRepository.findOne(id);
+
+		for (Rental rental : rentalRepository.findAllRentalByIdCustomer(customer)) {
+			RentalAndFilmWO rentalAndFilm = new RentalAndFilmWO(rental);
+
+			// on va dans la table inventory
+			Inventory inv = inventoryRepository.findOne(rental.getInventory().getInventoryId());
+
+			int filmid = inv.getFilm().getFilmId();
+			Film film = filmRepository.findOne(filmid);
+			System.out.println(rental.getRentalId());
+			rentalAndFilm.setFilmId(film.getFilmId());
+			rentalAndFilm.setTitle(film.getTitle());
+			rentals.add(rentalAndFilm);
+		}
+
+		return rentals;
+	}
+
+	@Override
 	public void saveRental(RentalWO rentalWO) throws ParseException {
 
 		Inventory inventory = inventoryRepository.findOne(rentalWO.getInventoryId());
-		Customer customer = customerEepository.findOne(rentalWO.getCustomerId());
+		Customer customer = customerRepository.findOne(rentalWO.getCustomerId());
 		Staff staff = staffRepository.findOne(rentalWO.getStaffId());
 
 		Rental rental = new Rental();

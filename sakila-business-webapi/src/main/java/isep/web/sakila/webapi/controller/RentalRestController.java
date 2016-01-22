@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import isep.web.sakila.webapi.model.RentalAndFilmWO;
 import isep.web.sakila.webapi.model.RentalWO;
 import isep.web.sakila.webapi.service.InventoryService;
 import isep.web.sakila.webapi.service.RentalService;
@@ -54,6 +55,15 @@ public class RentalRestController {
 		return new ResponseEntity<List<RentalWO>>(rentals, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/getRentalAndFilmByCustomerId/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<RentalAndFilmWO>> getRentalAndFilmByCustomerId(@PathVariable("id") int id) {
+
+		List<RentalAndFilmWO> rentalAndFilm = rentalService.findByIdCustomer(id);
+		if (rentalAndFilm.isEmpty()) {
+			return new ResponseEntity<List<RentalAndFilmWO>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<RentalAndFilmWO>>(rentalAndFilm, HttpStatus.OK);
+	}
 	// ---------------------------------------------------------------------------------------------
 
 	@RequestMapping(value = "/createRental/", method = RequestMethod.POST)
