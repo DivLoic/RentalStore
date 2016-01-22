@@ -4,13 +4,15 @@ App.controller('ActorController', ['$scope', 'ActorService', function($scope, Ac
 	var self = this;
 	self.actor={actorId:null,lastName:'',firstName:''};
 	self.actors=[];
+	self.casting = [];
 
 	self.fetchAllActors = function(){
 		ActorService.fetchAllActors()
 		.then(
 				function(d) {
 					self.actors = d;
-					console.log('Success to retrieve all actors')
+					console.log('Success to retrieve all actors');
+					self.setCasting();
 				},
 				function(errResponse){
 					console.error('Error while fetching Currencies');
@@ -87,6 +89,13 @@ App.controller('ActorController', ['$scope', 'ActorService', function($scope, Ac
 	self.reset = function(){
 		self.actor={actorId:null,lastName:'',firstName:''};
 		$scope.myForm.$setPristine(); //reset Form
+	};
+	
+	
+	self.setCasting = function(){
+		self.casting = self.actors.map(function(actor){
+			return {id: actor.actorId, text: actor.firstName +" "+ actor.lastName};
+		});
 	};
 
 }]);

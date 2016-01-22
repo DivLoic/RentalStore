@@ -87,12 +87,12 @@
 							<label class="col-md-2 control-lable" for="release">Release
 								year</label>
 							<div class="col-md-7">
-								<input type="date" ng-model="ctrl.film.release" name="release"
+								<input type="number" ng-model="ctrl.film.release" name="release"
 									class="form-control input-sm"
-									placeholder="Enter the release year" />
+									placeholder="Enter the release year" ng-maxlength="4"/>
 								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.firstName.$error.required">This is
-										a required field</span>
+									<span ng-show="myForm.release.$error.number" >This is
+										a need a number</span>
 								</div>
 							</div>
 						</div>
@@ -225,7 +225,6 @@
 					</div>
 					</fieldset>
 
-
 					<div class="has-error" ng-show="myForm.$dirty">
 						<span ng-show="myForm.firstName.$error.required">This is a
 							required field</span>
@@ -237,14 +236,17 @@
 					<div class="row" ng-controller="ActorController as actorCtrl">
 					<label class="col-md-2 control-lable" for="file">Select the actor(s)</label>
 						<div class="col-md-10">
-							<label ng-repeat="a in actorCtrl.actors">
+						
+							<label ng-repeat="a in actorCtrl.casting">
 								<table style="width: 200px;">
   						 				<tr style="height: 20px;">
        									<td style="text-align:left; vertical-align: left; font-size: 12;">
-											<input type="checkbox" checklist-model="a.actors" checklist-value="{{a.actorId}}"> {{a.lastName}} {{a.firstName}}
+												<input checklist-model="ctrl.film.listIdActor" 
+												checklist-value="a.id" type="checkbox" 
+												ng-model="checked"/>{{a.text}}<br/>
 										</td>
 									</tr>
-								</table>	
+								</table>
 							</label>
 						</div>
 					</div>
@@ -260,7 +262,7 @@
 							<table style="width: 100px;">
   						 		<tr style="height: 15px;">
        								<td style="text-align:left; vertical-align: left; font-size: 12;"> 
-       									<input type="checkbox" checklist-model="cat.categories" checklist-value="{{cat.categoryId}}"> {{cat.name}}
+       									<input type="checkbox" checklist-model="ctrl.film.categories" checklist-value="cat.categoryId" ng-model="checked"> {{cat.name}}
 									</td>
 								</tr>
 							</table>
@@ -334,6 +336,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 	 <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+	<script src="bower_components/checklist-model/checklist-model.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/service/actor_service.js"></script>
 	<script src="js/controller/actor_controller.js"></script>

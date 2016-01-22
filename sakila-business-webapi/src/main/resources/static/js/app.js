@@ -1,6 +1,6 @@
 'use strict';
 
-var App = angular.module('myApp',['ngCookies']);
+var App = angular.module('myApp',['ngCookies', 'checklist-model']);//
 
 App.controller('AuthController', ['$scope', '$cookieStore', '$location', function($scope, $cookieStore, $location) {
 	var self = this;

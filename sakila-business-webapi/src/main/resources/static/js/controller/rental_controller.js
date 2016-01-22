@@ -15,7 +15,7 @@ App.controller('RentalController', ['$scope', '$cookieStore', 'RentalService', '
 		self.rental['staffId'] = $cookieStore.get('staff_id');
 		self.currentRentalName = filmName;
 		
-	}
+	};
 	
 	self.saveRental = function(rental){
 		RentalService.createRental(rental)
