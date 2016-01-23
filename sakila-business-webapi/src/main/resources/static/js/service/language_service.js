@@ -31,7 +31,6 @@ App.factory('LanguageService', ['$http', '$q', function($http, $q){
 		},
 
 		updateLanguage: function(language, languageId){
-			console.log("XXX", language);
 			return $http.post('http://localhost:8080/updateLanguage/', language)
 			.then(
 					function(response){

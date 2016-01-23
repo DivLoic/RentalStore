@@ -32,7 +32,6 @@ App.factory('CategoryService', ['$http', '$q', function($http, $q){
 		},
 
 		updateCategory: function(category, categoryId){
-			console.log("XXX", category);
 			return $http.post('http://localhost:8080/updateCategory/', category)
 			.then(
 					function(response){

@@ -12,10 +12,20 @@ App.factory('InventoryService', ['$http', '$q', function($http, $q){
 					},
 					function(err){
 						console.log('Erreur du service, getInventories ');
-						console.log(err);
 						return $q.reject(err);
 					}
 			);
+		},
+		getInventoriesForStore: function(){
+			console.log('Using then Inventory service getInventoriesForStore');
+			return $http.get('').then(
+					function(res){
+						return res.data;
+					},
+					function(err){
+						return $q.reject(err);
+					}
+			)
 		},
 		getInventoriesByFilmId: function(filmId){
 			return $http.get('http://localhost:8080/getInventoryByIdFilm/' + filmId).then(
@@ -36,14 +46,13 @@ App.factory('InventoryService', ['$http', '$q', function($http, $q){
 					},
 					function(err){
 						console.log('Erreur du service, createInventory ');
-						console.log(err);
 						return $q.reject(err);
 					}
 			);
 		},
-		deteleInventoryByFilmId: function(){
+		deteleInventoryByFilmId: function(id){
 			console.log('Using the Inventory Service: deteleInventoryByFilmId.');
-			return $http.get('http://localhost:8080/deteleInventoryByFilmId/').then(
+			return $http.get('http://localhost:8080/deleteInventoryByIdFilm/' + id).then(
 				function(res){
 					console.log('Sucess du service, deteleInventoryByFilmId ');
 					return res.data;
@@ -63,7 +72,6 @@ App.factory('InventoryService', ['$http', '$q', function($http, $q){
 					},
 					function(err){
 						console.log('Erreur du service, creatInventory ');
-						console.log(err);
 						return $q.reject(err);
 					}
 			);

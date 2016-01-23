@@ -2,7 +2,8 @@
  * 
  */
 
-App.controller('InventoryController', ['$scope', 'InventoryService', 'FilmService', function($scope, InventoryService, FilmService) {
+App.controller('InventoryController', ['$scope', '$cookieStore', 'InventoryService', 'FilmService', 
+                                       function($scope, $cookieStore, InventoryService, FilmService) {
 	var self = this;
 	
 	self.film = {
@@ -31,9 +32,7 @@ App.controller('InventoryController', ['$scope', 'InventoryService', 'FilmServic
 				function(count){
 					film['quantity'] = count;
 				},
-				function(err){
-					//
-				}
+				function(err){}
 			)
 		});
 	};
@@ -52,7 +51,7 @@ App.controller('InventoryController', ['$scope', 'InventoryService', 'FilmServic
 	};
 	
 	self.fetchAllInventories = function(){
-		InventoryService.getInventories().then(
+		InventoryService.getInventoriesForStore($cookieStore.get('store_id')).then(
 			function(res){
 				self.inventories = res;
 			},
@@ -64,7 +63,7 @@ App.controller('InventoryController', ['$scope', 'InventoryService', 'FilmServic
 	
 	self.createInventory = function(inventory){
 		inventory['quantity']++;
-		var map = {filmId: inventory['filmId'], storeId: '1'};
+		var map = {filmId: inventory['filmId'], storeId: $cookieStore.get('store_id')};
 		InventoryService.createInventory(map).then(
 				self.setQuantity,
 				function(err){
@@ -82,8 +81,13 @@ App.controller('InventoryController', ['$scope', 'InventoryService', 'FilmServic
 		)
 	};
 	
-	self.deleteInventory = function(actorId){
-		InventoryService.deteleInventoryByFilmId(actorId).then(
+	self.deleteInventory = function(inventory){
+		inventory['quantity']--;
+		InventoryService.getInventoriesByFilmId(inventory['filmId']).then(
+				function(res){console.log(res)},
+				function(){console.log('____ An error occures____')}
+		)
+		InventoryService.deteleInventoryByFilmId(inventory['filmId']).then(
 			self.fetchAllInventories,
 			function(err){
 				console.log("Error: controller failed to deleted a inventory");

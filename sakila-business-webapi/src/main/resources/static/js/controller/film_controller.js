@@ -4,19 +4,6 @@ App.controller('FilmController', ['$scope' ,'FilmService', 'InventoryService', f
 	var self = this;
 	self.film={filmId:null,title:'',description:'', releaseYear:'', rentalDuration:'', rentalRate:'', lenght:'', language:null, features:'', listIdActor:[], categories:[]};
 	self.films=[];
-
-	self.setQuantity = function(){
-		self.films.forEach(function(film){
-			InventoryService.getInventoriesByFilmId(film['filmId']).then(
-					function(count){
-						film['quantity'] = count;
-					},
-					function(err){
-						//
-					}
-			)
-		});
-	};
 	
 	self.fetchAllFilms = function(){
 		FilmService.fetchAllFilms().then(

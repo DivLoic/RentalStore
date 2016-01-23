@@ -50,13 +50,14 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="film in ctrl.films">
-							<td><span ng-bind="film.filmId">{{film.filmId}}</span></td>
-							<td><span ng-bind="film.title">{{film.title}}</span></td>
-							<td><span ng-bind="film.quantity">{{film.quantity}}</span></td>
+							<td><span ng-bind="film.filmId"></span></td>
+							<td><span ng-bind="film.title"></span></td>
+							<td><span ng-bind="film.quantity > 0 ? film.quantity : 0"></span></td>
 							<td>
 								<button type="button" ng-click="ctrl.createInventory(film)"
-									class="btn btn-success custom-width">Add</button>
-								<button type="button" ng-click="ctrl.remove(u.filmId)" 
+									class="btn btn-success custom-width">Add</button><!-- disabled='{{film.quantity > 0 ? "false" : "true"}}' -->
+								<button type="button" ng-click="ctrl.deleteInventory(film)" 
+									ng-disabled='film.quantity > 0 ? false : true'
 									class="btn btn-danger custom-width">Remove</button>
 							</td>
 						</tr>

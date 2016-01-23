@@ -8,7 +8,6 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 			return $http.post('http://localhost:8080/getRentals/').then(
 					function(res){
 						console.log('Sucess du service, getRental: ');
-						console.log(res.data);
 						return res.data
 					},
 					function(err){
@@ -22,7 +21,6 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 			return $http.post('http://localhost:8080/createRental/', rent).then(
 					function(res){
 						console.log('Sucess du service, createRentall: ');
-						console.log(res.data);
 						return res.data
 					},
 					function(err){
@@ -36,7 +34,6 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 			return $http.post('http://localhost:8080/deleteRental/' + id).then(
 					function(res){
 						console.log('Sucess du service, deleteRental: ');
-						console.log(res.data);
 						return res.data;
 					},
 					function(err){
@@ -44,6 +41,19 @@ App.factory('RentalService', ['$http', '$q', function($http, $q){
 						return $q.reject(err);
 					}
 			);
+		},
+		updateRental: function(rental){
+			console.log('Using the Rental Service: updateRental.');
+			return $http.post('http://localhost:8080/deleteRental/' + rental['rentalId']).then(
+					function(res){
+						console.log('Sucess du service, updateRenta');
+						return res.data;
+					},
+					function(err){
+						consol.log('Erreur du service, updateRental');
+						return $q.reject(err);
+					}
+			);	
 		}
 	}
 }]);
