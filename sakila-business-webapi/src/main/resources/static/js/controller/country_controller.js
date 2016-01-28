@@ -36,6 +36,7 @@ App.controller('CountryController', ['$scope', 'CountryService', function($scope
           
           self.submit = function(){
         	if(self.country.countryId == ' '){
+        		console.log(self.country)
         		CountryService.addCountry(self.country).then(
         				self.fetchAllCountries,
         				function(){}

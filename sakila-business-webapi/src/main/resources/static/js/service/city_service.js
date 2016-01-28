@@ -15,8 +15,9 @@ App.factory('CityService', ['$http', '$q', function($http, $q){
 					}
 			);
 		},
-		addCity: function(){
-			return $http.post('http://localhost:8080/createCity/')
+		addCity: function(city){
+			console.log(city)
+			return $http.post('http://localhost:8080/createCity/', city)
 			.then(
 					function(response){
 						console.log('Success du service: addCity');

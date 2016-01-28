@@ -2,7 +2,7 @@
 
 App.controller('CityController', ['$scope', 'CityService', function($scope, CityService) {
 			var self = this;
-			self.city = {cityId : null, city : '', countryId : null};
+			self.city = {cityId :' ', city : '', countryId : ''};
 			self.cities = [];
 
 			self.fetchAllCities = function() {
@@ -15,7 +15,8 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 			};
 
 			self.createCity = function(city) {
-				CityService.createCity(city).then(self.fetchAllCities,
+				console.log(city)
+				CityService.addCity(city).then(self.fetchAllCities,
 						function(errResponse) {
 							console.error('Error while creating City.');
 						});
@@ -38,8 +39,8 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 			self.fetchAllCities();
 
 			self.submit = function() {
-				if (self.city.cityId == null) {
-					console.log('Saving New City', self.city);
+				if (self.city.cityId == ' ') {
+					console.log('Saving New City', self.city.city);
 					self.createCity(self.city);
 				} else {
 					console.log('City updating with id ', self.city.cityId);
@@ -73,8 +74,8 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 			self.reset = function() {
 				self.city = {
 					cityId : null,
-					cityName : '',
-					countryName : ''
+					city : '',
+					countryId : ''
 				};
 				$scope.myForm.$setPristine(); // reset Form
 			};
