@@ -7,8 +7,7 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 
 			self.fetchAllCities = function() {
 				CityService.fetchAllCities().then(function(d) {
-					self.city = d;
-					//console.log(d);
+					self.cities = d;
 				}, function(errResponse) {
 					console.error('Error while fetching Currencies');
 				});
@@ -29,18 +28,13 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 						});
 			};
 
-			self.deleteCity = function(cityId) {
-				CityService.deleteCity(cityId).then(self.fetchAllCities,
-						function(errResponse) {
-							console.error('Error while deleting City.');
-						});
-			};
-
 			self.fetchAllCities();
 
 			self.submit = function() {
 				if (self.city.cityId == ' ') {
 					console.log('Saving New City', self.city.city);
+					console.log('Saving New City', self.city.countryId);
+					console.log('Saving New City', self.city);
 					self.createCity(self.city);
 				} else {
 					console.log('City updating with id ', self.city.cityId);
@@ -50,30 +44,30 @@ App.controller('CityController', ['$scope', 'CityService', function($scope, City
 				self.reset();
 			};
 
-			self.edit = function(cityId) {
-				console.log('id to be edited', cityId);
-				for (var i = 0; i < self.cities.length; i++) {
-					if (self.cities[i].cityId == cityId) {
-						self.city = angular.copy(self.cities[i]);
-						break;
-					}
-				}
-			};
+//			self.edit = function(cityId) {
+//				console.log('id to be edited : ', cityId);
+//				console.log('length cities : '+self.cities.length);
+//				for (var i = 0; i < self.cities.length; i++) {
+//					console.log(self.cities[i].cityId);
+//					if (self.cities[i].cityId == cityId) {
+//						self.city = angular.copy(self.cities[i]);
+//						console.log(self.cities[i].cityId);
+//						break;
+//					}
+//				}
+//			};
+			
+			self.edit = function(city){
+	        	  self.city = angular.copy(city);
+	        	  //self.fetchAllCities();
+	        	  
+	          };
 
-			self.remove = function(cityId) {
-				console.log('id to be deleted', cityId);
-				for (var i = 0; i < self.cities.length; i++) {
-					if (self.cities[i].cityId == cityId) {
-						self.reset();
-						break;
-					}
-				}
-				self.deleteCity(cityId);
-			};
+
 
 			self.reset = function() {
 				self.city = {
-					cityId : null,
+					cityId : ' ',
 					city : '',
 					countryId : ''
 				};

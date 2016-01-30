@@ -16,7 +16,6 @@ App.factory('CityService', ['$http', '$q', function($http, $q){
 			);
 		},
 		addCity: function(city){
-			console.log(city)
 			return $http.post('http://localhost:8080/createCity/', city)
 			.then(
 					function(response){
@@ -29,18 +28,18 @@ App.factory('CityService', ['$http', '$q', function($http, $q){
 					}
 			);
 		},
-		deleteCity: function(){
-			return $http.post('http://localhost:8080/deleteCity/')
+		updateCity: function(city){
+			return $http.post('http://localhost:8080/updateCity/', city)
 			.then(
 					function(response){
-						console.log('Success du service: deleteCity');
+						console.log('Success du service: updateCity');
 						return response.data;
 					}, 
 					function(errResponse){
-						console.log('Error while fetching deleteCity');
+						console.log('Error while fetching updateCity');
 						return $q.reject(errResponse);
 					}
 			);
-		} 
+		}
 	}
 }]);
