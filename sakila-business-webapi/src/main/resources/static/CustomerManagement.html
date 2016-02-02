@@ -132,12 +132,13 @@
 
 
 
-					<div class="row " ng-controller="CityController as ctrlCity">
+					<div class="row">
 						<div class="form-group col-md-12">
 							<label class="col-md-2 control-lable" for="file"> Select city: </label><br>
-							<div class="col-md-7">
-								<select ng-options="c.cityId as c.city for c in ctrlCity.city" 
-								name="city_id" ng-model="ctrl.customer.city_id" required>						
+							<div class="col-md-7" ng-controller="CityController as ctrlCity">
+								<select name="city_id" ng-model="ctrl.customer.city_id" required>
+									<option value="">Select the city :</option>						
+									<option ng-repeat="c in ctrlCity.cities" value="{{c.cityId}}">{{c.city}}</option>
 								</select><br/>
 								
 								<div class="has-error" ng-show="myForm.$dirty">
