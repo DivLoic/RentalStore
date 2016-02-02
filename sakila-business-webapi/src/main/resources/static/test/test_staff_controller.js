@@ -15,6 +15,7 @@ describe('StaffController', function(){
 	
 	it('should declare as authenticate', function(){
 		var $scope = {};
+		var $cookieStore = {};
 		// Mock de service
 		var MockStaffService = { logStaff : function(){
 			return new Promise(function(resolve, reject) {
@@ -23,7 +24,7 @@ describe('StaffController', function(){
 			}
 		};
 		
-		var controller = $controller('StaffController', {$scope: $scope, StaffService: MockStaffService});
+		var controller = $controller('StaffController', {$scope: $scope, $cookieStore: $cookieStore, StaffService: MockStaffService});
 		controller['staff'] = {'username': 'Mike', 'password': 'azerty'};
 		// finally the TEST ! ! !
 		controller.submit(function(res){expect(res).toBe(true);});

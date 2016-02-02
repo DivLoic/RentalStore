@@ -40,8 +40,9 @@ App.controller('GiveBackController', ['$scope', 'RentalService', 'FilmService',
 	};
 	
 	self.submit = function(){
+		self.film['returnDate'] = new Date().toISOString().slice(0, 10);
 		console.log(self.film);
-		RentalService.updateRental(self.film).then(
+		RentalService.deleteRental(self.film).then(
 				function(){
 					console.log('Sucess de la récupération du DVD');
 				},

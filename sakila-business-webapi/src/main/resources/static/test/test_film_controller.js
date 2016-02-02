@@ -19,6 +19,7 @@ describe('', function(){
 	beforeEach(module('myApp'));
 	beforeEach(inject(function(_$controller_){
 		$scope = {};
+		$cookieStore = {};
 		$controller = _$controller_;
 	}));
 	
@@ -32,13 +33,12 @@ describe('', function(){
 				resolve(tab);
 			})}
 		};
+		
 		var controller = null;
 			
 		async.series([function(){ 
-			controller = $controller('FilmController', {$scope: $scope, FilmService: MockService});
-		},
-		
-		]);
+			controller = $controller('FilmController', {$scope: $scope, $cookieStore: $cookieStore, FilmService: MockService});
+		}]);
 
 		
 		

@@ -1,5 +1,4 @@
 /**
- * 
  */
 describe('CityController', function(){
 	
@@ -19,6 +18,7 @@ describe('CityController', function(){
 	
 	it('should return a list of city', function(){
 		var $scope = {};
+		var $cookieStore = {};
 		// Mock de service
 		var MockService = { fetchAllCities: function(){
 			return new Promise(function(resolve, reject){
@@ -32,12 +32,12 @@ describe('CityController', function(){
 		}
 		
 		async.series([function(){
-			controller = $controller('CityController', {$scope: $scope, CustomerService: MockService});
+			controller = $controller('CityController', {$scope: $scope, $cookieStore:$cookieStore, CustomerService: MockService});
 		},allTest
 		])
 	});
 	
 	
-});/**
+});/*
  * 
  */

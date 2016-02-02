@@ -50,14 +50,14 @@
                       </div>
                         
                       
-                      <div class="row">
+                      <!-- <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="file">Return date:</label>
                               <div class="col-md-7">
                                   <input type="text" ng-model="ctrl.rental.returnDate" name="returnDate"  class="form-control input-sm" placeholder="yyyy-MM-dd"/>
                               </div>
                           </div>
-                      </div>
+                      </div> -->
                       
                       <div class="row">
                           <div class="form-group col-md-12">
@@ -108,9 +108,9 @@
                           <tr ng-repeat="u in ctrl_inv.films">
                               <td><span ng-bind="u.filmId"></span></td>
                               <td><span ng-bind="u.title"></span></td>
-                              <td><span ng-bind="u.quantity"></span></td>
+                              <td><span ng-bind="u.quantity > 0 ? u.quantity : 0"></span></td>
                               <td>
-                              <button ng-disabled="u.quantity == 0" type="button" ng-click="ctrl.loadRental(u.filmId, u.title)" class="btn btn-success custom-width">Rent</button>
+                              <button ng-disabled="u.quantity <= 0" type="button" ng-click="ctrl.loadRental(u.filmId, u.title)" class="btn btn-success custom-width">Rent</button>
                               <!-- <button type="button" ng-click="ctrl.remove(u.filmId)" class="btn btn-danger custom-width">Remove</button> -->
                               </td>
                           </tr>

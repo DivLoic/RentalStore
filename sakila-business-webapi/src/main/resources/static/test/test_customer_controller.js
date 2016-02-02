@@ -22,6 +22,7 @@ describe('CustomerController', function(){
 	
 	it('should return a list of customer', function(){
 		var $scope = {};
+		var $cookieStore = {};
 		// Mock de service
 		var MockService = { getCustomer: function(){
 			return new Promise(function(resolve, reject){
@@ -31,7 +32,7 @@ describe('CustomerController', function(){
 		
 		var controller = $controller(
 				'CustomerController', 
-				{$scope: $scope, CustomerService: MockService}
+				{$scope: $scope, $cookieStore: $cookieStore, CustomerService: MockService}
 		);
 		
 		setTimeout(function(){
